@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1425483792 source:c:\users\arno\documents\cours\informatique\projet 2\ece city\main.c
+	"projet.h"
+
+1425643675 source:c:\users\arno\documents\cours\informatique\projet 2\ece city\affichage.c
+	"projet.h"
+
+1425484370 c:\users\arno\documents\cours\informatique\projet 2\ece city\projet.h
+	<stdio.h>
+	<stdlib.h>
+	<allegro.h>
+	<time.h>
+	"affichage.h"
+	"editeur.h"
+
+1425643692 c:\users\arno\documents\cours\informatique\projet 2\ece city\affichage.h
+
+1425643522 c:\users\arno\documents\cours\informatique\projet 2\ece city\editeur.h
+
+1425643562 source:c:\users\arno\documents\cours\informatique\projet 2\ece city\editeur.c
+	"projet.h"
+
