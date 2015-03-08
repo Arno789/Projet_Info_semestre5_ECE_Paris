@@ -3,6 +3,7 @@
 t_case* plateau [LARGEUR_PLATEAU][HAUTEUR_PLATEAU];
 int coord_X, coord_Y;
 
+
 void init_plateau ()
 {
     for (coord_X=0; coord_X<LARGEUR_PLATEAU ; coord_X++)
@@ -17,6 +18,7 @@ void init_plateau ()
             plateau [coord_X][coord_Y]->bat->consommation_eau=0;
             plateau [coord_X][coord_Y]->bat->consommation_elec=0;
             plateau [coord_X][coord_Y]->bat->image_bat=NULL;
+            printf ("i");
         }
     }
 }
@@ -53,5 +55,4 @@ void placer_industrie ()
     plateau [coord_X][coord_Y]->bat->image_bat = chargerImage("industrie_lv1.bmp");
     plateau [coord_X][coord_Y]->bat->type = 'i';
 }
-
 

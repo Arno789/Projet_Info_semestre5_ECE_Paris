@@ -36,4 +36,7 @@ typedef struct tcase
 
 extern t_case* plateau[LARGEUR_PLATEAU][HAUTEUR_PLATEAU];
 extern int coord_X, coord_Y;
+
+void init_plateau();
+
 #endif // EDITEUR_H_INCLUDED

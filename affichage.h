@@ -16,6 +16,7 @@ typedef struct horloge
 } t_horloge;
 
 extern BITMAP* buffer;
+extern BITMAP* buffer2;
 extern BITMAP* horloge_image;
 
 void initialiser_allegro();
@@ -23,6 +24,8 @@ void affichage (BITMAP *image);
 BITMAP *chargerImage(char *nomFichierImage);
 void afficher_temps_console ();
 BITMAP* init_buffer (BITMAP* buffer);
+void afficher_matrice ();
+void afficher_case_matrice();
 
 
 #endif // AFFICHAGE_H_INCLUDED

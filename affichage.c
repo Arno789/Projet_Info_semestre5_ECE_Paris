@@ -25,6 +25,7 @@ void affichage (BITMAP *image)
     clear_bitmap (buffer);
     blit (image, buffer, 0,0,0,0, SCREEN_W, SCREEN_H);
     afficher_temps_allegro ();
+    afficher_matrice ();
     blit (buffer, screen, 0,0,0,0, SCREEN_W, SCREEN_H);
 }
 
@@ -54,4 +55,22 @@ void afficher_temps_console ()
     printf("%d/%d/%d %d:%d:%d\n", horloge.jour, horloge.mois, horloge.an, horloge.heure, horloge.minute, horloge.seconde);
 }
 
+void afficher_matrice ()
+{
+    for (coord_X=0 ; coord_X < LARGEUR_PLATEAU ; coord_X++)
+    {
+        for (coord_Y=0 ; coord_Y < HAUTEUR_PLATEAU ; coord_Y++)
+            {
+                //printf ("%d\t%d\n", coord_X, coord_Y);
+                afficher_case_matrice();
+            }
+    }
+}
 
+void afficher_case_matrice()
+{
+    if (plateau [coord_X] [coord_Y]->bat&&plateau [coord_X] [coord_Y]->bat->image_bat)
+        draw_sprite (buffer, plateau [coord_X] [coord_Y]->bat->image_bat, 20*coord_X , 20*coord_Y);
+    if ((coord_X+coord_Y)%2)
+        rectfill(buffer, 20*coord_X, 20*coord_Y, 20*coord_X+19, 20*coord_Y+19, makecol (200,100,100));
+}
