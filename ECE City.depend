@@ -20,14 +20,15 @@
 1425643562 source:c:\users\arno\documents\cours\informatique\projet 2\ece city\editeur.c
 	"projet.h"
 
-1425813670 source:c:\users\arno\documents\github\projet_info\affichage.c
+1425842984 source:c:\users\arno\documents\github\projet_info\affichage.c
 	"projet.h"
 
-1425484370 c:\users\arno\documents\github\projet_info\projet.h
+1425841839 c:\users\arno\documents\github\projet_info\projet.h
 	<stdio.h>
 	<stdlib.h>
 	<allegro.h>
 	<time.h>
+	<math.h>
 	"affichage.h"
 	"editeur.h"
 

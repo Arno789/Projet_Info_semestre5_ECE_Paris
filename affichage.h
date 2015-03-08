@@ -31,6 +31,7 @@ BITMAP* init_buffer (BITMAP* buffer);
 void afficher_matrice ();
 void afficher_case_matrice();
 void gerer_zoom ();
+void gerer_deplacement ();
 
 
 #endif // AFFICHAGE_H_INCLUDED

@@ -28,12 +28,12 @@ void affichage (BITMAP *image)
     blit (image, buffer, 0,0,0,0, SCREEN_W, SCREEN_H);
     afficher_temps_allegro ();
     afficher_matrice ();
-    blit (buffer, screen, 0,0,0,0, SCREEN_W, SCREEN_H);
+    blit (buffer, screen, depX, depY,0,0, SCREEN_W, SCREEN_H);
 }
 
 BITMAP* init_buffer (BITMAP* buffer)
 {
-    buffer = create_bitmap(SCREEN_W,SCREEN_H);
+    buffer = create_bitmap(7*SCREEN_W,7*SCREEN_H);
     clear_bitmap(buffer);
     return (buffer);
 }
@@ -62,10 +62,10 @@ void afficher_matrice ()
     for (coord_X=0 ; coord_X < LARGEUR_PLATEAU ; coord_X++)
     {
         for (coord_Y=0 ; coord_Y < HAUTEUR_PLATEAU ; coord_Y++)
-            {
-                //printf ("%d\t%d\n", coord_X, coord_Y);
-                afficher_case_matrice();
-            }
+        {
+            //printf ("%d\t%d\n", coord_X, coord_Y);
+            afficher_case_matrice();
+        }
     }
 }
 
@@ -77,30 +77,56 @@ void afficher_case_matrice()
     x2 = (20*(coord_X+1))*zoom;
     y2 = (20*(coord_Y+1))*zoom;
 
-    /*if (plateau [coord_X] [coord_Y]->bat&&plateau [coord_X] [coord_Y]->bat->image_bat)
-        draw_sprite (buffer, plateau [coord_X] [coord_Y]->bat->image_bat, 20*coord_X , 20*coord_Y);*/
-    if ((coord_X+coord_Y)%2)
-        rectfill(buffer, x1, y1,x2, y2, makecol (200,100,100));
+    if (plateau [coord_X] [coord_Y]->bat&&plateau [coord_X] [coord_Y]->bat->image_bat)
+        stretch_sprite(buffer, plateau [coord_X] [coord_Y]->bat->image_bat, 20*coord_X*zoom, 20*coord_Y*zoom, 20*zoom, 20*zoom);
+    ///draw_sprite (buffer, plateau [coord_X] [coord_Y]->bat->image_bat, 20*coord_X , 20*coord_Y);
+    else if ((coord_X+coord_Y)%2)
+        rectfill(buffer, x1, y1,x2, y2, makecol (100,200,100));
 }
 
 
- void gerer_zoom ()
- {
+void gerer_zoom ()
+{
 
-      if (zoom == 1)      ///pour éviter les légers décalages apres avoir zoomé puis dé zoomé
-        {
-            depX=0;
-            depY=0;
-        }
+    if (zoom == 1)      ///pour éviter les légers décalages apres avoir zoomé puis dé zoomé
+    {
+        depX=0;
+        depY=0;
+    }
 
-        if (mouse_z<0) mouse_z=0;                   /// on ne veut pas dezoomer
-        zoom = 1 + mouse_z*0.3;                     /// la valeur du zoom dépend de la molette de la souris
+    if (mouse_z<0) mouse_z=0;                   /// on ne veut pas dezoomer
+    if (mouse_z>20) mouse_z=20;
+    zoom = 1 + mouse_z*0.3;                     /// la valeur du zoom dépend de la molette de la souris
+    gerer_deplacement ();
+}
 
-/*
-    if (key[KEY_ALT])
-        {
-            depX = depX - mouse_depx/zoom;    ///Déplacement du dessin (quand on a zoomé) en maintenant Alt enfoncé
-            depY = depY - mouse_depy/zoom;
-            printf ("%f\n", depX);
-        }*/
- }
+void gerer_deplacement ()
+{
+    if (mouse_x<10)
+    {
+        depX=depX-2*(10-mouse_x);
+    }
+    if (mouse_y<10)
+    {
+        depY=depY-2*(10-mouse_y);
+    }
+
+    if (mouse_x>1014)
+    {
+        depX=depX+2*(mouse_x-1014);
+    }
+    if (mouse_y>758)
+    {
+        depY=depY+2*(mouse_y-758);
+    }
+
+    if (depX>LARGEUR_PLATEAU*20*zoom+30-SCREEN_W)
+        depX=LARGEUR_PLATEAU*20*zoom+30-SCREEN_W;
+    if (depY>HAUTEUR_PLATEAU*20*zoom+30-SCREEN_H)
+        depY=HAUTEUR_PLATEAU*20*zoom+30-SCREEN_H;
+    if (depX<0)
+        depX=0;
+    if (depY<0)
+        depY=0;
+
+}
