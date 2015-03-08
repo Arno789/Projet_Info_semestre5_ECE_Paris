@@ -33,10 +33,30 @@ typedef struct tcase
     short int construction;
 }t_case;
 
+extern char touche;
+
+
+extern char bouton;
+
+
+extern int mouse_click;
+
+
+extern int mouse_unclick;
+
+
+extern int key_press[KEY_MAX];
+extern int key_unpress[KEY_MAX];
+
+
+extern int mouse_depx;
+extern int mouse_depy;
+
 
 extern t_case* plateau[LARGEUR_PLATEAU][HAUTEUR_PLATEAU];
 extern int coord_X, coord_Y;
 
 void init_plateau();
+void rafraichir_clavier_souris();
 
 #endif // EDITEUR_H_INCLUDED

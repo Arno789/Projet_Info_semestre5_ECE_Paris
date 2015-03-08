@@ -1,6 +1,7 @@
 #include "projet.h"
 
-
+float zoom=1;
+float depX=0, depY=0;
 void initialiser_allegro()
 {
     allegro_init();
@@ -22,6 +23,7 @@ void initialiser_allegro()
 
 void affichage (BITMAP *image)
 {
+    gerer_zoom ();
     clear_bitmap (buffer);
     blit (image, buffer, 0,0,0,0, SCREEN_W, SCREEN_H);
     afficher_temps_allegro ();
@@ -69,8 +71,36 @@ void afficher_matrice ()
 
 void afficher_case_matrice()
 {
-    if (plateau [coord_X] [coord_Y]->bat&&plateau [coord_X] [coord_Y]->bat->image_bat)
-        draw_sprite (buffer, plateau [coord_X] [coord_Y]->bat->image_bat, 20*coord_X , 20*coord_Y);
+    int x1, y1, x2, y2;
+    x1 = 20*coord_X*zoom;
+    y1 = 20*coord_Y*zoom;
+    x2 = (20*(coord_X+1))*zoom;
+    y2 = (20*(coord_Y+1))*zoom;
+
+    /*if (plateau [coord_X] [coord_Y]->bat&&plateau [coord_X] [coord_Y]->bat->image_bat)
+        draw_sprite (buffer, plateau [coord_X] [coord_Y]->bat->image_bat, 20*coord_X , 20*coord_Y);*/
     if ((coord_X+coord_Y)%2)
-        rectfill(buffer, 20*coord_X, 20*coord_Y, 20*coord_X+19, 20*coord_Y+19, makecol (200,100,100));
+        rectfill(buffer, x1, y1,x2, y2, makecol (200,100,100));
 }
+
+
+ void gerer_zoom ()
+ {
+
+      if (zoom == 1)      ///pour éviter les légers décalages apres avoir zoomé puis dé zoomé
+        {
+            depX=0;
+            depY=0;
+        }
+
+        if (mouse_z<0) mouse_z=0;                   /// on ne veut pas dezoomer
+        zoom = 1 + mouse_z*0.3;                     /// la valeur du zoom dépend de la molette de la souris
+
+/*
+    if (key[KEY_ALT])
+        {
+            depX = depX - mouse_depx/zoom;    ///Déplacement du dessin (quand on a zoomé) en maintenant Alt enfoncé
+            depY = depY - mouse_depy/zoom;
+            printf ("%f\n", depX);
+        }*/
+ }
