@@ -63,7 +63,7 @@ void traitement_clique ()
     case 0x000000:
         printf("0,0,0\n");
         break;
-    case 0xff0000:
+    case 0x007f7f:
         printf ("maison\n");
         construction->construction=1;
         construction->case_a_construire= creer_maison();
@@ -78,12 +78,12 @@ void traitement_clique ()
     case 0x00ffff:
         printf("0,255,255\n");
         break;
-    case 0x00ff00:
+    case 0x7fff00:
         printf ("commerce\n");
         construction->construction=1;
         construction->case_a_construire = creer_commerce();
         break;
-    case 0x0000ff:
+    case 0xff56ff:
         printf ("industrie\n");
         construction->construction=1;
         construction->case_a_construire = creer_industrie();

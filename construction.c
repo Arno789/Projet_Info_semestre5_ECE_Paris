@@ -47,8 +47,8 @@ t_case* creer_industrie ()
     case_cree->bat = malloc(sizeof (t_bat));
     case_cree->bat->consommation_eau = CSMA_EAU_INDUSTRIE_LV1;
     case_cree->bat->consommation_elec = CSMA_ELEC_INDUSTRIE_LV1;
-    ///case_cree->bat->image_bat = chargerImage("industrie_lv1.bmp");
-    case_cree->bat->image_bat = NULL;
+    case_cree->bat->image_bat = chargerImage("industrie_lv1.bmp");
+    //case_cree->bat->image_bat = NULL;
     case_cree->bat->type = 'i';
     return case_cree;
 }

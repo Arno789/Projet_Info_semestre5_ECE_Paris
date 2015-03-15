@@ -1,5 +1,7 @@
 #include "projet.h"
 
+t_horloge horloge;
+int acceleration=1;
 
 void init_temps ()
 {

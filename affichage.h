@@ -21,6 +21,7 @@ extern BITMAP* buffer2;
 extern BITMAP* horloge_image;
 extern BITMAP* image_acceuil;
 extern BITMAP* image_action_bo;
+extern BITMAP* boconst;
 
 extern float zoom;
 extern float depX, depY;

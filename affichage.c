@@ -2,6 +2,11 @@
 
 float zoom=1;
 float depX=0, depY=0;
+BITMAP* buffer=NULL;
+BITMAP* image_acceuil=NULL;
+BITMAP* horloge_image = NULL;
+BITMAP* image_action_bo = NULL;
+BITMAP* boconst = NULL;
 
 void initialiser_allegro()
 {
@@ -29,6 +34,7 @@ void affichage (BITMAP *image)
     blit (image, buffer, 0,0,0,0, SCREEN_W, SCREEN_H);
     afficher_matrice ();
     afficher_construction_en_cours ();
+    masked_blit(boconst, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
     afficher_temps_allegro ();
     blit (buffer, screen, depX, depY,0,0, SCREEN_W, SCREEN_H);
 }
