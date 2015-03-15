@@ -14,6 +14,7 @@ extern int acceleration;
 extern t_horloge horloge;
 
 void init_temps ();
+void init_action();
 void temps (clock_t t1);
 void afficher_temps_allegro ();
 

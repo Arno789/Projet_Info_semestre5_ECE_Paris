@@ -2,6 +2,7 @@
 #define AFFICHAGE_H_INCLUDED
 #define SCREEN_LARGEUR 1024
 #define SCREEN_HAUTEUR 768
+#define TAILLE_CASE 20
 
 typedef struct horloge
 {
@@ -19,6 +20,7 @@ extern BITMAP* buffer;
 extern BITMAP* buffer2;
 extern BITMAP* horloge_image;
 extern BITMAP* image_acceuil;
+extern BITMAP* image_action_bo;
 
 extern float zoom;
 extern float depX, depY;

@@ -72,13 +72,13 @@ void afficher_matrice ()
 void afficher_case_matrice()
 {
     int x1, y1, x2, y2;
-    x1 = 20*coord_X*zoom;
-    y1 = 20*coord_Y*zoom;
-    x2 = (20*(coord_X+1))*zoom;
-    y2 = (20*(coord_Y+1))*zoom;
+    x1 = TAILLE_CASE*coord_X*zoom;
+    y1 = TAILLE_CASE*coord_Y*zoom;
+    x2 = (TAILLE_CASE*(coord_X+1))*zoom;
+    y2 = (TAILLE_CASE*(coord_Y+1))*zoom;
 
     if (plateau [coord_X] [coord_Y]->bat&&plateau [coord_X] [coord_Y]->bat->image_bat)
-        stretch_sprite(buffer, plateau [coord_X] [coord_Y]->bat->image_bat, 20*coord_X*zoom, 20*coord_Y*zoom, 20*zoom, 20*zoom);
+        stretch_sprite(buffer, plateau [coord_X] [coord_Y]->bat->image_bat, TAILLE_CASE*coord_X*zoom, TAILLE_CASE*coord_Y*zoom, TAILLE_CASE*zoom, TAILLE_CASE*zoom);
     ///draw_sprite (buffer, plateau [coord_X] [coord_Y]->bat->image_bat, 20*coord_X , 20*coord_Y);
     else if ((coord_X+coord_Y)%2)
         rectfill(buffer, x1, y1,x2, y2, makecol (100,200,100));
@@ -120,10 +120,10 @@ void gerer_deplacement ()
         depY=depY+2*(mouse_y-758);
     }
 
-    if (depX>LARGEUR_PLATEAU*20*zoom+30-SCREEN_W)
-        depX=LARGEUR_PLATEAU*20*zoom+30-SCREEN_W;
-    if (depY>HAUTEUR_PLATEAU*20*zoom+30-SCREEN_H)
-        depY=HAUTEUR_PLATEAU*20*zoom+30-SCREEN_H;
+    if (depX>LARGEUR_PLATEAU*TAILLE_CASE*zoom+30-SCREEN_W)
+        depX=LARGEUR_PLATEAU*TAILLE_CASE*zoom+30-SCREEN_W;
+    if (depY>HAUTEUR_PLATEAU*TAILLE_CASE*zoom+30-SCREEN_H)
+        depY=HAUTEUR_PLATEAU*TAILLE_CASE*zoom+30-SCREEN_H;
     if (depX<0)
         depX=0;
     if (depY<0)

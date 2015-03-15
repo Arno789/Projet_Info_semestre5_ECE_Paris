@@ -5,6 +5,7 @@ t_horloge horloge;
 BITMAP* buffer=NULL;
 BITMAP* image_acceuil=NULL;
 BITMAP* horloge_image = NULL;
+BITMAP* image_action_bo = NULL;
 int acceleration=1;
 
 
@@ -93,9 +94,12 @@ void init_all ()
     buffer = init_buffer(buffer);
     image_acceuil=chargerImage("blanc.bmp");
     horloge_image=chargerImage("clock.bmp");
+    image_action_bo = chargerImage("action.bmp");
 
     init_temps ();
     init_plateau();
+    init_action();
+    init_construction ();
 }
 
 int main()
@@ -109,6 +113,7 @@ int main()
     {
         rafraichir_clavier_souris();
         affichage (image_acceuil);
+        traitement_clique();
         temps(t1);
         rest (20);
     }

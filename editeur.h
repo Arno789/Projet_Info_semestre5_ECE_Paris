@@ -33,11 +33,33 @@ typedef struct tcase
     short int construction;
 }t_case;
 
+typedef struct action
+{
+    int construction_maison;
+    int construction_commerce;
+    int construction_industrie;
+    int construction_caserne;
+    int construction_commico;
+    int construction_hopital;
+    int construction_chateau_eau;
+    int construction_centrale_elec;
+    int construction_autre;
+}t_action;
+
+typedef struct construction
+{
+    short int construction;
+    t_case* case_a_construire;
+}t_construction;
+
+extern t_construction* construction;
+
 extern char touche;
 
 
 extern char bouton;
 
+extern t_action* action;
 
 extern int mouse_click;
 
@@ -58,5 +80,6 @@ extern int coord_X, coord_Y;
 
 void init_plateau();
 void rafraichir_clavier_souris();
+void traitement_clique ();
 
 #endif // EDITEUR_H_INCLUDED
