@@ -7,86 +7,8 @@ BITMAP* image_acceuil=NULL;
 BITMAP* horloge_image = NULL;
 BITMAP* image_action_bo = NULL;
 int acceleration=1;
+int sortie=0;
 
-
-void init_temps ()
-{
-    horloge.an = 2015;
-    horloge.mois = 5;
-    horloge.jour = 1;
-    horloge.heure = 12;
-    horloge.minute = 0;
-    horloge.seconde = 0;
-    horloge.tic=0;
-}
-
-void temps (clock_t t1)
-{
-    clock_t t2;
-    long clk_tck = CLOCKS_PER_SEC;
-    t2 = clock();
-    if (horloge.clock1 != (t2-t1)/clk_tck %60)
-        horloge.tic=1;
-    else horloge.tic=0;
-    if (key[KEY_PLUS_PAD])
-        acceleration++;
-    else if (key[KEY_MINUS_PAD])
-        acceleration--;
-    horloge.clock1 = (t2-t1)/clk_tck%60;
-    if (horloge.tic)
-        horloge.seconde=horloge.seconde+acceleration;
-    if (horloge.seconde>=60)
-    {
-        horloge.minute++;
-        horloge.seconde=0;
-    }
-    if (horloge.minute>=60)
-    {
-        horloge.heure++;
-        horloge.minute=0;
-    }
-    if (horloge.heure>=24)
-    {
-        horloge.heure = 0;
-        horloge.jour++;
-    }
-    if (horloge.tic)
-        afficher_temps_console ();
-}
-
-
-void afficher_temps_allegro ()
-{
-    int t,x,i;
-    t=0;
-    x=0;
-    for (i=0; i<5; i++)
-    {
-        switch (i)
-        {
-        case 0:
-            x=12*(horloge.minute/10);
-            break;
-        case 1 :
-            x=12*(horloge.minute%10);
-            break;
-        case 2 :
-            x = 120;
-            break;
-        case 3 :
-            x=12*(horloge.seconde/10);
-            break;
-        case 4 :
-            x=12*(horloge.seconde%10);
-            break;
-        }
-        t=t+15;
-        masked_blit (horloge_image, buffer, x, 0, SCREEN_W/2+t, SCREEN_H-100, 12, 55);
-
-    }
-    //printf("\n");
-
-}
 
 void init_all ()
 {
@@ -102,6 +24,21 @@ void init_all ()
     init_construction ();
 }
 
+void verification_sortie()
+{
+    if (key_press[KEY_ESC])
+    {
+        if (construction->construction)
+        {
+            construction->construction=0;
+            free(construction->case_a_construire);
+            construction->case_a_construire=NULL;
+        }
+        else if (!construction->construction)
+            sortie=1;
+    }
+}
+
 int main()
 {
 
@@ -109,9 +46,10 @@ int main()
     clock_t t1;
     t1 = clock ();
 
-    while (!key[KEY_ESC])
+    while (!sortie)
     {
         rafraichir_clavier_souris();
+        verification_sortie();
         affichage (image_acceuil);
         traitement_clique();
         temps(t1);

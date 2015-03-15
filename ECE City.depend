@@ -20,10 +20,10 @@
 1425643562 source:c:\users\arno\documents\cours\informatique\projet 2\ece city\editeur.c
 	"projet.h"
 
-1426424232 source:c:\users\arno\documents\github\projet_info\affichage.c
+1426440108 source:c:\users\arno\documents\github\projet_info\affichage.c
 	"projet.h"
 
-1426192266 c:\users\arno\documents\github\projet_info\projet.h
+1426439726 c:\users\arno\documents\github\projet_info\projet.h
 	<stdio.h>
 	<stdlib.h>
 	<allegro.h>
@@ -31,14 +31,26 @@
 	<math.h>
 	"affichage.h"
 	"editeur.h"
+	"construction.h"
 
-1426424232 c:\users\arno\documents\github\projet_info\affichage.h
+1426439009 c:\users\arno\documents\github\projet_info\affichage.h
 
-1426427058 c:\users\arno\documents\github\projet_info\editeur.h
+1426436847 c:\users\arno\documents\github\projet_info\editeur.h
 
-1426427326 source:c:\users\arno\documents\github\projet_info\editeur.c
+1426442036 source:c:\users\arno\documents\github\projet_info\editeur.c
 	"projet.h"
 
-1426427426 source:c:\users\arno\documents\github\projet_info\main.c
+1426440108 source:c:\users\arno\documents\github\projet_info\main.c
+	"projet.h"
+
+1426436847 c:\users\arno\documents\github\projet_info\construction.h
+
+1426442994 source:c:\users\arno\documents\github\projet_info\construction.c
+	"projet.h"
+
+1426440108 source:c:\users\arno\documents\github\projet_info\horloge.c
+	"projet.h"
+
+1426442036 source:c:\users\arno\documents\github\projet_info\route.c
 	"projet.h"
 

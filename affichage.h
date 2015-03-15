@@ -34,6 +34,7 @@ void afficher_matrice ();
 void afficher_case_matrice();
 void gerer_zoom ();
 void gerer_deplacement ();
+void afficher_construction_en_cours ();
 
 
 #endif // AFFICHAGE_H_INCLUDED

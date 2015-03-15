@@ -46,13 +46,6 @@ typedef struct action
     int construction_autre;
 }t_action;
 
-typedef struct construction
-{
-    short int construction;
-    t_case* case_a_construire;
-}t_construction;
-
-extern t_construction* construction;
 
 extern char touche;
 
@@ -80,6 +73,6 @@ extern int coord_X, coord_Y;
 
 void init_plateau();
 void rafraichir_clavier_souris();
-void traitement_clique ();
+
 
 #endif // EDITEUR_H_INCLUDED

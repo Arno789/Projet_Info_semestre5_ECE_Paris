@@ -2,6 +2,7 @@
 
 float zoom=1;
 float depX=0, depY=0;
+
 void initialiser_allegro()
 {
     allegro_init();
@@ -26,8 +27,9 @@ void affichage (BITMAP *image)
     gerer_zoom ();
     clear_bitmap (buffer);
     blit (image, buffer, 0,0,0,0, SCREEN_W, SCREEN_H);
-    afficher_temps_allegro ();
     afficher_matrice ();
+    afficher_construction_en_cours ();
+    afficher_temps_allegro ();
     blit (buffer, screen, depX, depY,0,0, SCREEN_W, SCREEN_H);
 }
 
@@ -51,6 +53,39 @@ BITMAP *chargerImage(char *nomFichierImage)
     printf("Image charg\202e : %s\n", nomFichierImage);
     return bmp;
 }
+
+
+void afficher_temps_allegro ()
+{
+    int t,x,i;
+    t=0;
+    x=0;
+    for (i=0; i<5; i++)
+    {
+        switch (i)
+        {
+        case 0:
+            x=12*(horloge.minute/10);
+            break;
+        case 1 :
+            x=12*(horloge.minute%10);
+            break;
+        case 2 :
+            x = 120;
+            break;
+        case 3 :
+            x=12*(horloge.seconde/10);
+            break;
+        case 4 :
+            x=12*(horloge.seconde%10);
+            break;
+        }
+        t=t+15;
+        masked_blit (horloge_image, buffer, x, 0, SCREEN_W/2+t, SCREEN_H-100, 12, 55);
+
+    }
+}
+
 
 void afficher_temps_console ()
 {
@@ -128,5 +163,18 @@ void gerer_deplacement ()
         depX=0;
     if (depY<0)
         depY=0;
-
 }
+
+
+void afficher_construction_en_cours ()
+{
+    coord_X=mouse_x/TAILLE_CASE;
+    coord_Y=mouse_y/TAILLE_CASE;
+    if (construction->construction && construction->case_a_construire)
+    {
+        if (!plateau [coord_X][coord_Y]->construction)
+            if (construction->case_a_construire->bat->image_bat!=NULL)
+                stretch_sprite(buffer, construction->case_a_construire->bat->image_bat, TAILLE_CASE*coord_X*zoom, TAILLE_CASE*coord_Y*zoom, TAILLE_CASE*zoom, TAILLE_CASE*zoom);
+    }
+}
+
