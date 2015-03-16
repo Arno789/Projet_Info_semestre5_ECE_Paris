@@ -1,6 +1,6 @@
 #include "projet.h"
 
-t_case* plateau [LARGEUR_PLATEAU][HAUTEUR_PLATEAU];
+//t_case* plateau [LARGEUR_PLATEAU][HAUTEUR_PLATEAU];
 int coord_X, coord_Y;
 char touche;
 char bouton;
@@ -8,45 +8,10 @@ int mouse_click;
 int mouse_unclick;
 int key_press[KEY_MAX];
 int key_unpress[KEY_MAX];
-t_action* action;
 
 
 int mouse_depx;
 int mouse_depy;
-
-
-void init_action ()
-{
-    action = malloc (sizeof (t_action));
-    action->construction_autre=0;
-    action->construction_caserne=0;
-    action->construction_centrale_elec=0;
-    action->construction_chateau_eau=0;
-    action->construction_commerce=0;
-    action->construction_commico=0;
-    action->construction_hopital=0;
-    action->construction_industrie=0;
-    action->construction_maison=0;
-}
-void init_plateau ()
-{
-    for (coord_X=0; coord_X<LARGEUR_PLATEAU ; coord_X++)
-    {
-        for (coord_Y=0; coord_Y<HAUTEUR_PLATEAU ; coord_Y++)
-        {
-            plateau [coord_X][coord_Y] = malloc(sizeof(t_case));
-            plateau [coord_X][coord_Y]->bat = malloc(sizeof(t_bat));
-            plateau [coord_X][coord_Y]->construction=0;
-            plateau [coord_X][coord_Y]->densite=0;
-            plateau [coord_X][coord_Y]->hapiness=0;
-            plateau [coord_X][coord_Y]->bat->consommation_eau=0;
-            plateau [coord_X][coord_Y]->bat->consommation_elec=0;
-            plateau [coord_X][coord_Y]->bat->image_bat=NULL;
-            plateau [coord_X][coord_Y]->bat->type='n';
-        }
-    }
-}
-
 
 void traitement_clique ()
 {

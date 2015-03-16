@@ -14,8 +14,7 @@ void init_all ()
     boconst = chargerImage("construction.bmp");
 
     init_temps ();
-    init_plateau();
-    init_action();
+    init_ville();
     init_construction ();
 }
 
@@ -45,9 +44,9 @@ int main()
     {
         rafraichir_clavier_souris();
         verification_sortie();
-        affichage (image_acceuil);
         traitement_clique();
         temps(t1);
+        affichage (image_acceuil);
         rest (20);
     }
     return 0;

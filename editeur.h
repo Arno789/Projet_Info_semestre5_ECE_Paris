@@ -15,63 +15,26 @@
 #define CSMA_EAU_INDUSTRIE_LV1 0
 #define CSMA_ELEC_INDUSTRIE_LV1 0
 
-typedef struct bat
-{
-    int consommation_eau;
-    int consommation_elec;
-    ///int rejet_dechet;
-    ///int rejet_pollution;
-    BITMAP* image_bat;
-    char type;
-}t_bat;
 
-typedef struct tcase
-{
-    int hapiness;
-    int densite;
-    t_bat* bat;
-    short int construction;
-}t_case;
+extern char touche;  ///Déclaration type compalleg *///
+                                                    ///
+extern char bouton;                                 ///
+                                                    ///
+extern int mouse_click;                             ///
+                                                    ///
+                                                    ///
+extern int mouse_unclick;                           ///
+                                                    ///
+                                                    ///
+extern int key_press[KEY_MAX];                      ///
+extern int key_unpress[KEY_MAX];                    ///
+                                                    ///
+                                                    ///
+extern int mouse_depx;                              ///
+extern int mouse_depy;                              ///
 
-typedef struct action
-{
-    int construction_maison;
-    int construction_commerce;
-    int construction_industrie;
-    int construction_caserne;
-    int construction_commico;
-    int construction_hopital;
-    int construction_chateau_eau;
-    int construction_centrale_elec;
-    int construction_autre;
-}t_action;
+extern int coord_X, coord_Y;  ///Variable globale indiquant les coordonnées de la case 'active'
 
-
-extern char touche;
-
-
-extern char bouton;
-
-extern t_action* action;
-
-extern int mouse_click;
-
-
-extern int mouse_unclick;
-
-
-extern int key_press[KEY_MAX];
-extern int key_unpress[KEY_MAX];
-
-
-extern int mouse_depx;
-extern int mouse_depy;
-
-
-extern t_case* plateau[LARGEUR_PLATEAU][HAUTEUR_PLATEAU];
-extern int coord_X, coord_Y;
-
-void init_plateau();
 void rafraichir_clavier_souris();
 
 

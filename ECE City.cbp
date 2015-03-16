@@ -38,14 +38,34 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="affichage.h" />
+		<Unit filename="case.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="case.h" />
+		<Unit filename="construction.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="construction.h" />
 		<Unit filename="editeur.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="editeur.h" />
+		<Unit filename="horloge.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="horloge.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="projet.h" />
+		<Unit filename="route.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="route.h" />
+		<Unit filename="ville.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="ville.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

@@ -104,7 +104,6 @@ void afficher_matrice ()
     {
         for (coord_Y=0 ; coord_Y < HAUTEUR_PLATEAU ; coord_Y++)
         {
-            //printf ("%d\t%d\n", coord_X, coord_Y);
             afficher_case_matrice();
         }
     }
@@ -118,9 +117,9 @@ void afficher_case_matrice()
     x2 = (TAILLE_CASE*(coord_X+1))*zoom;
     y2 = (TAILLE_CASE*(coord_Y+1))*zoom;
 
-    if (plateau [coord_X] [coord_Y]->bat&&plateau [coord_X] [coord_Y]->bat->image_bat)
-        stretch_sprite(buffer, plateau [coord_X] [coord_Y]->bat->image_bat, TAILLE_CASE*coord_X*zoom, TAILLE_CASE*coord_Y*zoom, TAILLE_CASE*zoom, TAILLE_CASE*zoom);
-    ///draw_sprite (buffer, plateau [coord_X] [coord_Y]->bat->image_bat, 20*coord_X , 20*coord_Y);
+    if (ville->plateau [coord_X] [coord_Y]->bat && ville->plateau [coord_X] [coord_Y]->bat->image_bat)
+        stretch_sprite(buffer, ville->plateau [coord_X] [coord_Y]->bat->image_bat, TAILLE_CASE*coord_X*zoom, TAILLE_CASE*coord_Y*zoom, TAILLE_CASE*zoom, TAILLE_CASE*zoom);
+    ///draw_sprite (buffer, ville->plateau [coord_X] [coord_Y]->bat->image_bat, 20*coord_X , 20*coord_Y);
     else if ((coord_X+coord_Y)%2)
         rectfill(buffer, x1, y1,x2, y2, makecol (100,200,100));
 }
@@ -128,7 +127,6 @@ void afficher_case_matrice()
 
 void gerer_zoom ()
 {
-
     if (zoom == 1)      ///pour éviter les légers décalages apres avoir zoomé puis dé zoomé
     {
         depX=0;
@@ -178,7 +176,7 @@ void afficher_construction_en_cours ()
     coord_Y=mouse_y/TAILLE_CASE;
     if (construction->construction && construction->case_a_construire)
     {
-        if (!plateau [coord_X][coord_Y]->construction)
+        if (!ville->plateau [coord_X][coord_Y]->construction)
             if (construction->case_a_construire->bat->image_bat!=NULL)
                 stretch_sprite(buffer, construction->case_a_construire->bat->image_bat, TAILLE_CASE*coord_X*zoom, TAILLE_CASE*coord_Y*zoom, TAILLE_CASE*zoom, TAILLE_CASE*zoom);
     }

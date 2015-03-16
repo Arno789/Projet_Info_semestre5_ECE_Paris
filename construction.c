@@ -64,9 +64,9 @@ void init_construction ()
 
 void placement ()
 {
-    if (!plateau [coord_X][coord_Y]->construction && mouse_click)
+    if (!ville->plateau [coord_X][coord_Y]->construction && mouse_click)
     {
-        plateau [coord_X][coord_Y]=construction->case_a_construire;
+        ville->plateau [coord_X][coord_Y]=construction->case_a_construire;
         construction->construction=0;
     }
 }
