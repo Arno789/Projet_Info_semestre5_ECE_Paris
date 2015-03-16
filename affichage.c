@@ -3,10 +3,16 @@
 float zoom=1;
 float depX=0, depY=0;
 BITMAP* buffer=NULL;
+BITMAP* buffer_image=NULL;
 BITMAP* image_acceuil=NULL;
 BITMAP* horloge_image = NULL;
 BITMAP* image_action_bo = NULL;
 BITMAP* boconst = NULL;
+BITMAP* bo = NULL;
+BITMAP* bo_couleur = NULL;
+BITMAP* im_commerce_lv1=NULL;
+BITMAP* im_maison_lv1=NULL;
+BITMAP* im_industrie_lv1=NULL;
 
 void initialiser_allegro()
 {
@@ -34,8 +40,10 @@ void affichage (BITMAP *image)
     blit (image, buffer, 0,0,0,0, SCREEN_W, SCREEN_H);
     afficher_matrice ();
     afficher_construction_en_cours ();
-    masked_blit(boconst, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+    affichage_barre_outil ();
     afficher_temps_allegro ();
+    if (key[KEY_B])
+        blit (buffer_image, buffer, 0, 0,0,0, SCREEN_W, SCREEN_H);
     blit (buffer, screen, depX, depY,0,0, SCREEN_W, SCREEN_H);
 }
 
@@ -44,6 +52,13 @@ BITMAP* init_buffer (BITMAP* buffer)
     buffer = create_bitmap(7*SCREEN_W,7*SCREEN_H);
     clear_bitmap(buffer);
     return (buffer);
+}
+
+void affichage_barre_outil ()
+{
+    masked_blit(bo, buffer, 0, 0, depX, SCREEN_H+depY-HAUTEUR_BO, SCREEN_W, SCREEN_H);
+    if (test_constru)
+        masked_blit(boconst, buffer, 0, 0, depX, SCREEN_H-HAUTEUR_BO_BAT+depY, SCREEN_W, SCREEN_H);
 }
 
 BITMAP *chargerImage(char *nomFichierImage)
@@ -60,6 +75,27 @@ BITMAP *chargerImage(char *nomFichierImage)
     return bmp;
 }
 
+void init_image()
+{
+    im_commerce_lv1=chargerImage("commerce_lv1.bmp");
+    im_maison_lv1=chargerImage("maison_lv1.bmp");
+    im_industrie_lv1=chargerImage("industrie_lv1.bmp");
+    bo = chargerImage("barre_outils.bmp");
+    bo_couleur = chargerImage("barre_outils_couleur.bmp");
+}
+
+void init_buffer_image()
+{
+    buffer_image = create_bitmap(SCREEN_W,SCREEN_H);
+}
+
+void gerer_buffer_image()
+{
+    clear_bitmap (buffer_image);
+    blit (bo_couleur, buffer_image, 0, 0, 0, SCREEN_H-HAUTEUR_BO, SCREEN_W, SCREEN_H);
+    if (test_constru)
+        blit (image_action_bo, buffer_image, 0, 0, 0, SCREEN_H-HAUTEUR_BO_BAT, SCREEN_W, SCREEN_H);
+}
 
 void afficher_temps_allegro ()
 {
@@ -87,7 +123,7 @@ void afficher_temps_allegro ()
             break;
         }
         t=t+15;
-        masked_blit (horloge_image, buffer, x, 0, SCREEN_W/2+t, SCREEN_H-100, 12, 55);
+        masked_blit (horloge_image, buffer, x, 0, 10+t+depX, SCREEN_H-40+depY, 12, 55);
 
     }
 }
@@ -172,8 +208,7 @@ void gerer_deplacement ()
 
 void afficher_construction_en_cours ()
 {
-    coord_X=mouse_x/TAILLE_CASE;
-    coord_Y=mouse_y/TAILLE_CASE;
+    actualiser_coord ();
     if (construction->construction && construction->case_a_construire)
     {
         if (!ville->plateau [coord_X][coord_Y]->construction)

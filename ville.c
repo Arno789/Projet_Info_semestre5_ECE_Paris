@@ -12,6 +12,9 @@ void init_ville()
     {
         ville->plateau [coord_X] = malloc(HAUTEUR_PLATEAU*sizeof(t_case*));
         for (coord_Y=0 ; coord_Y<HAUTEUR_PLATEAU ; coord_Y++)
+        {
+            //ville->plateau[coord_X][coord_Y] = malloc(sizeof(t_case));
             ville->plateau[coord_X][coord_Y] = init_case();
+        }
     }
 }

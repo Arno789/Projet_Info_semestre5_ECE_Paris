@@ -12,10 +12,22 @@ void init_all ()
     horloge_image=chargerImage("clock.bmp");
     image_action_bo = chargerImage("construction_couleur.bmp");
     boconst = chargerImage("construction.bmp");
+    init_buffer_image();
 
+    init_image();
     init_temps ();
     init_ville();
     init_construction ();
+}
+
+void actualiser_coord ()
+{
+    coord_X=(mouse_x+depX)/(zoom*TAILLE_CASE);
+    coord_Y=(mouse_y+depY)/(zoom*TAILLE_CASE);
+    if (coord_Y>34)
+        coord_Y=34;
+    if (coord_X>44)
+        coord_X=44;
 }
 
 void verification_sortie()

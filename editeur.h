@@ -36,6 +36,7 @@ extern int mouse_depy;                              ///
 extern int coord_X, coord_Y;  ///Variable globale indiquant les coordonnées de la case 'active'
 
 void rafraichir_clavier_souris();
+extern int test_constru;
 
 
 #endif // EDITEUR_H_INCLUDED

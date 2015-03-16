@@ -42,6 +42,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="case.h" />
+		<Unit filename="charger.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="charger.h" />
 		<Unit filename="construction.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -62,6 +66,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="route.h" />
+		<Unit filename="sauvegarder.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="sauvegarder.h" />
 		<Unit filename="ville.c">
 			<Option compilerVar="CC" />
 		</Unit>

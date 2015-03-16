@@ -1,6 +1,7 @@
 #include "projet.h"
 
 t_construction* construction;
+int test_constru=0;
 
 
 
@@ -14,7 +15,7 @@ t_case* creer_maison ()
     case_cree->bat = malloc(sizeof (t_bat));
     case_cree->bat->consommation_eau = CSMA_EAU_MAISON_LV1;
     case_cree->bat->consommation_elec = CSMA_ELEC_MAISON_LV1;
-    case_cree->bat->image_bat = chargerImage("maison_lv1.bmp");
+    case_cree->bat->image_bat = im_maison_lv1;
     //case_cree->bat->image_bat = NULL;
     case_cree->bat->type = 'm';
     return case_cree;
@@ -30,7 +31,7 @@ t_case* creer_commerce ()
     case_cree->bat = malloc(sizeof (t_bat));
     case_cree->bat->consommation_eau = CSMA_EAU_COMMERCE_LV1;
     case_cree->bat->consommation_elec = CSMA_ELEC_COMMERCE_LV1;
-    case_cree->bat->image_bat = chargerImage("commerce_lv1.bmp");
+    case_cree->bat->image_bat = im_commerce_lv1;
     //case_cree->bat->image_bat = NULL;
     case_cree->bat->type = 'c';
     return case_cree;
@@ -47,7 +48,7 @@ t_case* creer_industrie ()
     case_cree->bat = malloc(sizeof (t_bat));
     case_cree->bat->consommation_eau = CSMA_EAU_INDUSTRIE_LV1;
     case_cree->bat->consommation_elec = CSMA_ELEC_INDUSTRIE_LV1;
-    case_cree->bat->image_bat = chargerImage("industrie_lv1.bmp");
+    case_cree->bat->image_bat = im_industrie_lv1;
     //case_cree->bat->image_bat = NULL;
     case_cree->bat->type = 'i';
     return case_cree;

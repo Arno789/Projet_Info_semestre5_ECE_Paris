@@ -1,6 +1,5 @@
 #include "projet.h"
 
-//t_case* plateau [LARGEUR_PLATEAU][HAUTEUR_PLATEAU];
 int coord_X, coord_Y;
 char touche;
 char bouton;
@@ -15,25 +14,30 @@ int mouse_depy;
 
 void traitement_clique ()
 {
-    coord_X=mouse_x/TAILLE_CASE;
-    coord_Y=mouse_y/TAILLE_CASE;
+    gerer_buffer_image();
+    actualiser_coord ();
     int col=-1;
     if (mouse_click && !construction->construction)
     {
-        col=getpixel (image_action_bo, mouse_x, mouse_y);
+        col=getpixel (buffer_image, mouse_x, mouse_y);
         mouse_click=0;
+        printf("%d\n",col);
     }
     switch (col)
     {
-    case 0x000000:
-        printf("0,0,0\n");
+    case 0x00c800:
+        printf("mode construction\n");
+        if (!test_constru)
+            test_constru=1;
+        else if (test_constru)
+            test_constru=0;
         break;
     case 0x007f7f:
         printf ("maison\n");
         construction->construction=1;
         construction->case_a_construire= creer_maison();
         break;
-    case 0xffff00:
+    case 0xc80000:
         construction->construction=1;
         construction->case_a_construire= creer_route();
         break;

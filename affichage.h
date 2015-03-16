@@ -1,16 +1,25 @@
 #ifndef AFFICHAGE_H_INCLUDED
 #define AFFICHAGE_H_INCLUDED
-#define SCREEN_LARGEUR 800
-#define SCREEN_HAUTEUR 600
+#define SCREEN_LARGEUR 1024
+#define SCREEN_HAUTEUR 768
 #define TAILLE_CASE 20
+#define HAUTEUR_BO_BAT 138
+#define HAUTEUR_BO 70
 
 
 extern BITMAP* buffer;                  /// Déclaration en globale de toutes les BITMA¨P utilisées
-extern BITMAP* buffer2;                 ///
+extern BITMAP* buffer_image;                 ///
 extern BITMAP* horloge_image;           ///
 extern BITMAP* image_acceuil;           ///
 extern BITMAP* image_action_bo;         ///
-extern BITMAP* boconst;                 ///
+extern BITMAP* boconst;
+extern BITMAP* im_commerce_lv1;
+extern BITMAP* im_maison_lv1;
+extern BITMAP* im_industrie_lv1;
+extern BITMAP* bo_couleur;
+extern BITMAP* bo;
+
+
 
 extern float zoom;              /// Déclaration de la variable zoom, utilisé dans chaque fonction d'affichage
 extern float depX, depY;        /// Variable indiquant le déplacement de l'image par rapport a l'écran, liée avec le zoom
@@ -25,6 +34,10 @@ void afficher_case_matrice();                   ///Affiche une case sur le buffe
 void gerer_zoom ();                             ///Calcul le zoom en fct° de la position de la molette
 void gerer_deplacement ();                      ///Calcul depX et depY, en fct° du zoom, et le scroll de l'écran
 void afficher_construction_en_cours ();         ///Affichage de la fonction drag and drop lors d'une construction
+void affichage_barre_outil ();
+
+void init_buffer_image();
+void gerer_buffer_image();
 
 
 #endif // AFFICHAGE_H_INCLUDED
