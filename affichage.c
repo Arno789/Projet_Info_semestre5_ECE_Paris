@@ -1,10 +1,8 @@
 #include "projet.h"
 
-float zoom=1;
-float depX=0, depY=0;
 BITMAP* buffer=NULL;
 BITMAP* buffer_image=NULL;
-BITMAP* image_acceuil=NULL;
+BITMAP* terrain_jeu=NULL;
 BITMAP* horloge_image = NULL;
 BITMAP* image_action_bo = NULL;
 BITMAP* boconst = NULL;
@@ -33,33 +31,55 @@ void initialiser_allegro()
 
 }
 
-void affichage (BITMAP *image)
+void init_affichage_info (t_affichage* affichage_info)
 {
-    gerer_zoom ();
-    clear_bitmap (buffer);
-    blit (image, buffer, 0,0,0,0, SCREEN_W, SCREEN_H);
-    afficher_matrice ();
-    afficher_construction_en_cours ();
-    affichage_barre_outil ();
-    afficher_temps_allegro ();
-    if (key[KEY_B])
-        blit (buffer_image, buffer, 0, 0,0,0, SCREEN_W, SCREEN_H);
-    blit (buffer, screen, depX, depY,0,0, SCREEN_W, SCREEN_H);
+    affichage_info->depX = 0;
+    affichage_info->depY = 0;
+    affichage_info->zoom = 1;
 }
 
-BITMAP* init_buffer (BITMAP* buffer)
+void affichage (t_ville* ville, t_affichage* affichage_info, t_construction* construction)
 {
-    buffer = create_bitmap(7*SCREEN_W,7*SCREEN_H);
-    clear_bitmap(buffer);
-    return (buffer);
+    gerer_zoom (affichage_info);
+    clear_bitmap (buffer);
+    //blit (terrain_jeu, buffer, 0,0,0,0, SCREEN_W, SCREEN_H);
+    //stretch_sprite(buffer, terrain_jeu, depX-COORD_ORG_PLT_X, depY-COORD_ORG_PLT_Y, zoom*TAILLE_PLT_IMG_W, zoom*TAILLE_PLT_IMG_H);
+    if (affichage_info->zoom>=1)
+        stretch_blit(terrain_jeu, buffer, affichage_info->depX+COORD_ORG_PLT_X, affichage_info->depY+COORD_ORG_PLT_Y, SCREEN_W/affichage_info->zoom, SCREEN_H/affichage_info->zoom, 0,0, SCREEN_W, SCREEN_H);
+    else stretch_blit(terrain_jeu, buffer, 0, 0, TAILLE_PLT_IMG_W, TAILLE_PLT_IMG_H, 0,0, SCREEN_W*affichage_info->zoom, SCREEN_H*affichage_info->zoom);
+    //afficher_terrain ();
+    afficher_ville (ville, affichage_info);
+    afficher_construction_en_cours (ville, affichage_info, construction);
+    affichage_barre_outil    ();
+    //afficher_temps_allegro ();
+    if (key[KEY_B])
+        blit (buffer_image, buffer, 0, 0,0,0, SCREEN_W, SCREEN_H);
+    actualiser_coord (ville, affichage_info);
+    //blit (buffer, screen, depX, depY,0,0, SCREEN_W, SCREEN_H);
+    //stretch_blit(buffer, screen, depX, depY, zoom*SCREEN_W, zoom*SCREEN_H, 0, 0, SCREEN_W, SCREEN_H);
+    blit (buffer, screen, 0, 0,0,0, SCREEN_W, SCREEN_H);
+}
+
+void afficher_terrain ()
+{
+    //stretch_blit(terrain_jeu, buffer, depX+COORD_ORG_PLT_X, depY+COORD_ORG_PLT_Y, SCREEN_W/zoom, SCREEN_H/zoom, 0,0, SCREEN_W, SCREEN_H);
 }
 
 void affichage_barre_outil ()
 {
-    masked_blit(bo, buffer, 0, 0, depX, SCREEN_H+depY-HAUTEUR_BO, SCREEN_W, SCREEN_H);
+    masked_blit(bo, buffer, 0, 0, 0, SCREEN_H+0-HAUTEUR_BO, SCREEN_W, SCREEN_H);
     if (test_constru)
-        masked_blit(boconst, buffer, 0, 0, depX, SCREEN_H-HAUTEUR_BO_BAT+depY, SCREEN_W, SCREEN_H);
+        masked_blit(boconst, buffer, 0, 0, 0, SCREEN_H-HAUTEUR_BO_BAT+0, SCREEN_W, SCREEN_H);
 }
+
+
+BITMAP* init_buffer (BITMAP* buffer)
+{
+    buffer = create_bitmap(SCREEN_W,SCREEN_H);
+    clear_bitmap(buffer);
+    return (buffer);
+}
+
 
 BITMAP *chargerImage(char *nomFichierImage)
 {
@@ -97,123 +117,51 @@ void gerer_buffer_image()
         blit (image_action_bo, buffer_image, 0, 0, 0, SCREEN_H-HAUTEUR_BO_BAT, SCREEN_W, SCREEN_H);
 }
 
-void afficher_temps_allegro ()
+
+void gerer_zoom (t_affichage* affichage_info)
 {
-    int t,x,i;
-    t=0;
-    x=0;
-    for (i=0; i<5; i++)
-    {
-        switch (i)
-        {
-        case 0:
-            x=12*(horloge.minute/10);
-            break;
-        case 1 :
-            x=12*(horloge.minute%10);
-            break;
-        case 2 :
-            x = 120;
-            break;
-        case 3 :
-            x=12*(horloge.seconde/10);
-            break;
-        case 4 :
-            x=12*(horloge.seconde%10);
-            break;
-        }
-        t=t+15;
-        masked_blit (horloge_image, buffer, x, 0, 10+t+depX, SCREEN_H-40+depY, 12, 55);
-
-    }
-}
-
-
-void afficher_temps_console ()
-{
-    printf("%d/%d/%d %d:%d:%d\n", horloge.jour, horloge.mois, horloge.an, horloge.heure, horloge.minute, horloge.seconde);
-}
-
-void afficher_matrice ()
-{
-    for (coord_X=0 ; coord_X < LARGEUR_PLATEAU ; coord_X++)
-    {
-        for (coord_Y=0 ; coord_Y < HAUTEUR_PLATEAU ; coord_Y++)
-        {
-            afficher_case_matrice();
-        }
-    }
-}
-
-void afficher_case_matrice()
-{
-    int x1, y1, x2, y2;
-    x1 = TAILLE_CASE*coord_X*zoom;
-    y1 = TAILLE_CASE*coord_Y*zoom;
-    x2 = (TAILLE_CASE*(coord_X+1))*zoom;
-    y2 = (TAILLE_CASE*(coord_Y+1))*zoom;
-
-    if (ville->plateau [coord_X] [coord_Y]->bat && ville->plateau [coord_X] [coord_Y]->bat->image_bat)
-        stretch_sprite(buffer, ville->plateau [coord_X] [coord_Y]->bat->image_bat, TAILLE_CASE*coord_X*zoom, TAILLE_CASE*coord_Y*zoom, TAILLE_CASE*zoom, TAILLE_CASE*zoom);
-    ///draw_sprite (buffer, ville->plateau [coord_X] [coord_Y]->bat->image_bat, 20*coord_X , 20*coord_Y);
-    else if ((coord_X+coord_Y)%2)
-        rectfill(buffer, x1, y1,x2, y2, makecol (100,200,100));
-}
-
-
-void gerer_zoom ()
-{
-    if (zoom == 1)      ///pour éviter les légers décalages apres avoir zoomé puis dé zoomé
-    {
-        depX=0;
-        depY=0;
-    }
-
-    if (mouse_z<0) mouse_z=0;                   /// on ne veut pas dezoomer
+    if (mouse_z<-3) mouse_z=-3;                   /// on ne veut pas dezoomer
     if (mouse_z>20) mouse_z=20;
-    zoom = 1 + mouse_z*0.3;                     /// la valeur du zoom dépend de la molette de la souris
-    gerer_deplacement ();
+    affichage_info->zoom = 1 + mouse_z*0.3;                     /// la valeur du zoom dépend de la molette de la souris
+    /*f (key[KEY_PGDN])
+        affichage_info->zoom = affichage_info->zoom-0.1;
+    if (key[KEY_PGUP])                 ///Zoom géré au clavier OU à la souris.
+        affichage_info->zoom = affichage_info->zoom+0.1;*/
+    if (affichage_info->zoom < 0.1)
+        affichage_info->zoom = 0.1;
+    if (affichage_info->zoom > 10)
+        affichage_info->zoom = 10;
+    gerer_deplacement (affichage_info);
 }
 
-void gerer_deplacement ()
+void gerer_deplacement (t_affichage* affichage_info)
 {
     if (mouse_x<10)
     {
-        depX=depX-2*(10-mouse_x);
+        affichage_info->depX = affichage_info->depX-2*(10-mouse_x);
     }
     if (mouse_y<10)
     {
-        depY=depY-2*(10-mouse_y);
+        affichage_info->depY = affichage_info->depY-2*(10-mouse_y);
     }
 
-    if (mouse_x>1014)
+    if (mouse_x>(SCREEN_W-10))
     {
-        depX=depX+2*(mouse_x-1014);
+        affichage_info->depX = affichage_info->depX+2*(mouse_x-(SCREEN_W-10));
     }
-    if (mouse_y>758)
+    if (mouse_y>(SCREEN_H-10))
     {
-        depY=depY+2*(mouse_y-758);
+        affichage_info->depY = affichage_info->depY+2*(mouse_y-(SCREEN_H-10));
     }
 
-    if (depX>LARGEUR_PLATEAU*TAILLE_CASE*zoom+30-SCREEN_W)
-        depX=LARGEUR_PLATEAU*TAILLE_CASE*zoom+30-SCREEN_W;
-    if (depY>HAUTEUR_PLATEAU*TAILLE_CASE*zoom+30-SCREEN_H)
-        depY=HAUTEUR_PLATEAU*TAILLE_CASE*zoom+30-SCREEN_H;
-    if (depX<0)
-        depX=0;
-    if (depY<0)
-        depY=0;
+    if (affichage_info->depX>SCREEN_W+100-SCREEN_W/affichage_info->zoom)
+        affichage_info->depX=SCREEN_W+100-SCREEN_W/affichage_info->zoom;
+    if (affichage_info->depY>SCREEN_H+COORD_ORG_PLT_Y-SCREEN_H/affichage_info->zoom)
+        affichage_info->depY=SCREEN_H+COORD_ORG_PLT_Y-SCREEN_H/affichage_info->zoom;
+    if (affichage_info->depX<-COORD_ORG_PLT_X)
+        affichage_info->depX=-COORD_ORG_PLT_X;
+    if (affichage_info->depY<-COORD_ORG_PLT_Y)
+        affichage_info->depY=-COORD_ORG_PLT_Y;
 }
 
-
-void afficher_construction_en_cours ()
-{
-    actualiser_coord ();
-    if (construction->construction && construction->case_a_construire)
-    {
-        if (!ville->plateau [coord_X][coord_Y]->construction)
-            if (construction->case_a_construire->bat->image_bat!=NULL)
-                stretch_sprite(buffer, construction->case_a_construire->bat->image_bat, TAILLE_CASE*coord_X*zoom, TAILLE_CASE*coord_Y*zoom, TAILLE_CASE*zoom, TAILLE_CASE*zoom);
-    }
-}
 

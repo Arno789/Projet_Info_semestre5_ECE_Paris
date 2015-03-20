@@ -19,6 +19,7 @@ typedef struct bat
     char type;
 }t_bat;
 
+
 typedef struct tcase
 {
     int hapiness;   /// Non obligatoire, à utiliser plus tard
@@ -30,8 +31,6 @@ typedef struct tcase
 /*
 élément de base du PLATEAU : contient les infos de la case comme le bonheur, la densité, la CONSTRUCTION
 */
-
-
 
 ///struct VILLE
 /*
@@ -45,10 +44,14 @@ typedef struct ville
     int population;
     t_case*** plateau;
     int flouz;
+    int coord_X;
+    int coord_Y;
 }t_ville;
 
-extern t_ville* ville;
 
-void init_ville();
+void init_ville(t_ville* ville);
+
+              ///Appelle de facon optimisé le sous programme d'affichage de case.
+
 
 #endif // VILLE_H_INCLUDED

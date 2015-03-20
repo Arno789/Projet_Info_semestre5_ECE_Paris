@@ -1,5 +1,5 @@
 #include "projet.h"
-
+/*
 
 void charger_bat(FILE*fp,int i, int j)
 {
@@ -101,4 +101,4 @@ void charger_partie()
     }
 
     fclose(fp);
-}
+}*/

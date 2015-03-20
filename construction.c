@@ -1,6 +1,5 @@
 #include "projet.h"
 
-t_construction* construction;
 int test_constru=0;
 
 
@@ -55,20 +54,30 @@ t_case* creer_industrie ()
 }
 
 
-void init_construction ()
+void init_construction (t_construction* construction)
 {
-    construction = malloc(sizeof (t_construction));
     construction->case_a_construire=NULL;
     construction->construction=0;
 }
 
 
-void placement ()
+void placement (t_ville* ville, t_construction* construction)
 {
-    if (!ville->plateau [coord_X][coord_Y]->construction && mouse_click)
+    if (!ville->plateau [ville->coord_X][ville->coord_Y]->construction && mouse_click)
     {
-        ville->plateau [coord_X][coord_Y]=construction->case_a_construire;
+        ville->plateau [ville->coord_X][ville->coord_Y]=construction->case_a_construire;
         construction->construction=0;
     }
 }
 
+
+void afficher_construction_en_cours (t_ville* ville, t_affichage* affichage_info, t_construction* construction)
+{
+    actualiser_coord (ville, affichage_info);
+    if (construction->construction && construction->case_a_construire)
+    {
+        if (!ville->plateau [ville->coord_X][ville->coord_Y]->construction)
+            if (construction->case_a_construire->bat->image_bat!=NULL)
+                stretch_sprite(buffer, construction->case_a_construire->bat->image_bat, TAILLE_CASE*ville->coord_X*affichage_info->zoom, TAILLE_CASE*ville->coord_Y*affichage_info->zoom, TAILLE_CASE*affichage_info->zoom, TAILLE_CASE*affichage_info->zoom);
+    }
+}

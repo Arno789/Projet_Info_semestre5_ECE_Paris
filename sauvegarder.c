@@ -1,6 +1,6 @@
 #include "projet.h"
 
-
+/*
 void sauver_partie()
 {
     FILE* fp=NULL;
@@ -102,4 +102,4 @@ void sauvegarde_bat(FILE*fp,int i, int j)
     //fprintf(fp,"        rejet_pollution : %d\n\n",ville->plateau[i][j]->bat->rejet_pollution);
     ///image??
     fprintf(fp,"        type : %d\n",ville->plateau[i][j]->bat->type);
-}
+}*/

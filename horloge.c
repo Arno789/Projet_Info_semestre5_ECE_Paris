@@ -48,3 +48,40 @@ void temps (clock_t t1)
         afficher_temps_console ();
 }
 
+
+void afficher_temps_allegro (t_affichage* affichage_info)
+{
+    int t,x,i;
+    t=0;
+    x=0;
+    for (i=0; i<5; i++)
+    {
+        switch (i)
+        {
+        case 0:
+            x=12*(horloge.minute/10);
+            break;
+        case 1 :
+            x=12*(horloge.minute%10);
+            break;
+        case 2 :
+            x = 120;
+            break;
+        case 3 :
+            x=12*(horloge.seconde/10);
+            break;
+        case 4 :
+            x=12*(horloge.seconde%10);
+            break;
+        }
+        t=t+15;
+        masked_blit (horloge_image, buffer, x, 0, 10+t+affichage_info->depX, SCREEN_H-40+affichage_info->depY, 12, 55);
+
+    }
+}
+
+
+void afficher_temps_console ()
+{
+    printf("%d/%d/%d %d:%d:%d\n", horloge.jour, horloge.mois, horloge.an, horloge.heure, horloge.minute, horloge.seconde);
+}

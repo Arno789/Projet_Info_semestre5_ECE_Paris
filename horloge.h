@@ -14,4 +14,10 @@ typedef struct horloge
     long int clock1;   ///Je sais plus
 } t_horloge;
 
+void init_temps ();
+void temps (clock_t t1);
+
+void afficher_temps_allegro ();
+void afficher_temps_console ();                 ///Explicite ?
+
 #endif // HORLOGE_H_INCLUDED

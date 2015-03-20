@@ -33,10 +33,11 @@ extern int key_unpress[KEY_MAX];                    ///
 extern int mouse_depx;                              ///
 extern int mouse_depy;                              ///
 
-extern int coord_X, coord_Y;  ///Variable globale indiquant les coordonnées de la case 'active'
+extern int test_constru;
 
 void rafraichir_clavier_souris();
-extern int test_constru;
+
+void traitement_clique (t_ville* ville, t_construction* construction);
 
 
 #endif // EDITEUR_H_INCLUDED

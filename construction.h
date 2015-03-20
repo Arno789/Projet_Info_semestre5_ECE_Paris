@@ -8,13 +8,13 @@ typedef struct construction
     t_case* case_a_construire;
 }t_construction;
 
-extern t_construction* construction;
-void traitement_clique ();
-void init_construction ();
-void placement ();
+
+void init_construction (t_construction* construction);
+void placement (t_ville* ville, t_construction* construction);
 
 t_case* creer_maison ();
 t_case* creer_commerce ();
 t_case* creer_industrie ();
+
 
 #endif // CONSTRUCTION_H_INCLUDED

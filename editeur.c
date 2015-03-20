@@ -12,7 +12,7 @@ int key_unpress[KEY_MAX];
 int mouse_depx;
 int mouse_depy;
 
-void traitement_clique ()
+void traitement_clique (t_ville* ville, t_construction* construction)
 {
     gerer_buffer_image();
     actualiser_coord ();
@@ -39,6 +39,7 @@ void traitement_clique ()
         break;
     case 0xc80000:
         construction->construction=1;
+        test_constru=0;
         construction->case_a_construire= creer_route();
         break;
     case 0xff00ff:
@@ -59,7 +60,7 @@ void traitement_clique ()
         break;
     }
     if (construction->construction)
-        placement();
+        placement(ville, construction);
 }
 
 
