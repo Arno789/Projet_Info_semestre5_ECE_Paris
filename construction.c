@@ -78,6 +78,6 @@ void afficher_construction_en_cours (t_ville* ville, t_affichage* affichage_info
     {
         if (!ville->plateau [ville->coord_X][ville->coord_Y]->construction)
             if (construction->case_a_construire->bat->image_bat!=NULL)
-                stretch_sprite(buffer, construction->case_a_construire->bat->image_bat, TAILLE_CASE*ville->coord_X*affichage_info->zoom, TAILLE_CASE*ville->coord_Y*affichage_info->zoom, TAILLE_CASE*affichage_info->zoom, TAILLE_CASE*affichage_info->zoom);
+                stretch_sprite(buffer, construction->case_a_construire->bat->image_bat, (TAILLE_CASE*ville->coord_X-affichage_info->depX)*affichage_info->zoom, (TAILLE_CASE*ville->coord_Y-affichage_info->depY)*affichage_info->zoom, TAILLE_CASE*affichage_info->zoom, TAILLE_CASE*affichage_info->zoom);
     }
 }

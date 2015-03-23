@@ -23,9 +23,9 @@ void init_all (t_ville* ville, t_affichage* affichage_info, t_construction* cons
 
 void actualiser_coord (t_ville* ville, t_affichage* affichage_info)
 {
-    ville->coord_X=(mouse_x+affichage_info->depX)/(TAILLE_CASE);
-    ville->coord_Y=(mouse_y+affichage_info->depY)/(TAILLE_CASE);
-/*
+    ville->coord_X=(mouse_x + affichage_info->zoom * affichage_info->depX)/TAILLE_CASE/affichage_info->zoom; ///Déduit avec le théorème "de la grosse chatte de 00h18" ...
+    ville->coord_Y=(mouse_y + affichage_info->zoom * affichage_info->depY)/TAILLE_CASE/affichage_info->zoom;
+
     if (ville->coord_X<0)
         ville->coord_X=0;
     if (ville->coord_Y<0)
@@ -34,8 +34,9 @@ void actualiser_coord (t_ville* ville, t_affichage* affichage_info)
     if (ville->coord_Y>HAUTEUR_PLATEAU-1)
         ville->coord_Y=HAUTEUR_PLATEAU-1;
     if (ville->coord_X>LARGEUR_PLATEAU-1)
-        ville->coord_X=LARGEUR_PLATEAU-1;*/
-        printf("X: %d - Y: %d\tmouse_x: %d - mouse_y: %d  \tdepX: %d - depY: %d\n", ville->coord_X, ville->coord_Y, mouse_x, mouse_y, affichage_info->depX, affichage_info->depY);
+        ville->coord_X=LARGEUR_PLATEAU-1;
+        //printf("X: %d - Y: %d\tmouse_x: %d - mouse_y: %d  \tdepX: %d - depY: %d\n", ville->coord_X, ville->coord_Y, mouse_x, mouse_y, affichage_info->depX, affichage_info->depY);
+        //printf("zoom : %f\n", affichage_info->zoom);
 }
 
 void verification_sortie(t_construction* construction)

@@ -23,6 +23,8 @@ void afficher_ville (t_ville* ville, t_affichage* affichage_info)
     ///A modifier pour n'afficher que le necessaire !
     int x, y;
     int origine_x, origine_y;
+    int premiere_case_X, premiere_case_Y;
+
 
     ville->coord_X=affichage_info->depX/TAILLE_CASE;   ///On détermine quelle sera la première case a être dessinée
     ville->coord_Y=affichage_info->depY/TAILLE_CASE;   ///
@@ -46,15 +48,24 @@ void afficher_ville (t_ville* ville, t_affichage* affichage_info)
     if (y>HAUTEUR_PLATEAU-1)
         y=HAUTEUR_PLATEAU-1;
     //printf("x: %d - %d   y: %d - %d  zoom: %f  -  depX : %d  -  depY : %d\n", ville->coord_X, x,ville->coord_Y, y, affichage_info->zoom, affichage_info->depX, affichage_info->depY);
-    for (ville->coord_X=affichage_info->depX/TAILLE_CASE; ville->coord_X < x ; ville->coord_X++)
+
+    premiere_case_X = affichage_info->depX/TAILLE_CASE;
+    premiere_case_Y = affichage_info->depY/TAILLE_CASE;
+
+    if (premiere_case_X<0)
+        premiere_case_X=0;
+    if (premiere_case_Y<0)
+        premiere_case_Y=0;
+
+    for (ville->coord_X=premiere_case_X; ville->coord_X < x ; ville->coord_X++)
     {
-        for (ville->coord_Y=affichage_info->depY/TAILLE_CASE; ville->coord_Y < y ; ville->coord_Y++)
+        for (ville->coord_Y=premiere_case_Y; ville->coord_Y < y ; ville->coord_Y++)
         {
             origine_x = (TAILLE_CASE*ville->coord_X-affichage_info->depX)*affichage_info->zoom;
             origine_y = (TAILLE_CASE*ville->coord_Y-affichage_info->depY)*affichage_info->zoom;
             //printf ("\n%d  -  %d\n%d  -  %d\n\n", origine_x, origine_y, ville->coord_X, ville->coord_Y);
             //printf("x: %d  -  y: %d  -  zoom: %f\n", x, y, affichage_info->zoom);
-            //afficher_case_matrice(ville->plateau[ville->coord_X][ville->coord_Y], origine_x, origine_y, affichage_info);
+            afficher_case_matrice(ville->plateau[ville->coord_X][ville->coord_Y], origine_x, origine_y, affichage_info);
         }
     }
 }

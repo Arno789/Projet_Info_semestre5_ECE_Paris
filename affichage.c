@@ -42,14 +42,15 @@ void affichage (t_ville* ville, t_affichage* affichage_info, t_construction* con
 {
     gerer_zoom (affichage_info);
     clear_bitmap (buffer);
-    //blit (terrain_jeu, buffer, 0,0,0,0, SCREEN_W, SCREEN_H);
-    //stretch_sprite(buffer, terrain_jeu, depX-COORD_ORG_PLT_X, depY-COORD_ORG_PLT_Y, zoom*TAILLE_PLT_IMG_W, zoom*TAILLE_PLT_IMG_H);
-    if (affichage_info->zoom>=1)
+
+    if (affichage_info->zoom>=1) ///Affichage du fond d'écran du plateu de jeu
         stretch_blit(terrain_jeu, buffer, affichage_info->depX+COORD_ORG_PLT_X, affichage_info->depY+COORD_ORG_PLT_Y, SCREEN_W/affichage_info->zoom, SCREEN_H/affichage_info->zoom, 0,0, SCREEN_W, SCREEN_H);
     else stretch_blit(terrain_jeu, buffer, 0, 0, TAILLE_PLT_IMG_W, TAILLE_PLT_IMG_H, 0,0, SCREEN_W*affichage_info->zoom, SCREEN_H*affichage_info->zoom);
-    //afficher_terrain ();
+
     afficher_ville (ville, affichage_info);
+
     afficher_construction_en_cours (ville, affichage_info, construction);
+
     affichage_barre_outil    ();
     //afficher_temps_allegro ();
     if (key[KEY_B])
@@ -57,7 +58,7 @@ void affichage (t_ville* ville, t_affichage* affichage_info, t_construction* con
     actualiser_coord (ville, affichage_info);
     //blit (buffer, screen, depX, depY,0,0, SCREEN_W, SCREEN_H);
     //stretch_blit(buffer, screen, depX, depY, zoom*SCREEN_W, zoom*SCREEN_H, 0, 0, SCREEN_W, SCREEN_H);
-    blit (buffer, screen, 0, 0,0,0, SCREEN_W, SCREEN_H);
+    blit (buffer, screen, 0,0,0,0, SCREEN_W, SCREEN_H);
 }
 
 void afficher_terrain ()
