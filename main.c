@@ -35,8 +35,8 @@ void actualiser_coord (t_ville* ville, t_affichage* affichage_info)
         ville->coord_Y=HAUTEUR_PLATEAU-1;
     if (ville->coord_X>LARGEUR_PLATEAU-1)
         ville->coord_X=LARGEUR_PLATEAU-1;
-        //printf("X: %d - Y: %d\tmouse_x: %d - mouse_y: %d  \tdepX: %d - depY: %d\n", ville->coord_X, ville->coord_Y, mouse_x, mouse_y, affichage_info->depX, affichage_info->depY);
-        //printf("zoom : %f\n", affichage_info->zoom);
+        printf("X: %d - Y: %d\tmouse_x: %d - mouse_y: %d  \tdepX: %d - depY: %d\n", ville->coord_X, ville->coord_Y, mouse_x, mouse_y, affichage_info->depX, affichage_info->depY);
+        printf("zoom : %f\n", affichage_info->zoom);
 }
 
 void verification_sortie(t_construction* construction)

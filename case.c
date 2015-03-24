@@ -37,4 +37,5 @@ void afficher_case_matrice(t_case* tcase, int x, int y, t_affichage* affichage_i
     {
         stretch_sprite (buffer, tcase->bat->image_bat, x, y, TAILLE_CASE*affichage_info->zoom, TAILLE_CASE*affichage_info->zoom);
     }
+
 }

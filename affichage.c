@@ -45,7 +45,7 @@ void affichage (t_ville* ville, t_affichage* affichage_info, t_construction* con
 
     if (affichage_info->zoom>=1) ///Affichage du fond d'écran du plateu de jeu
         stretch_blit(terrain_jeu, buffer, affichage_info->depX+COORD_ORG_PLT_X, affichage_info->depY+COORD_ORG_PLT_Y, SCREEN_W/affichage_info->zoom, SCREEN_H/affichage_info->zoom, 0,0, SCREEN_W, SCREEN_H);
-    else stretch_blit(terrain_jeu, buffer, 0, 0, TAILLE_PLT_IMG_W, TAILLE_PLT_IMG_H, 0,0, SCREEN_W*affichage_info->zoom, SCREEN_H*affichage_info->zoom);
+    else stretch_blit(terrain_jeu, buffer, 0, 0, TAILLE_PLT_IMG_W, TAILLE_PLT_IMG_H, 6,6, (SCREEN_W+290)*affichage_info->zoom, (SCREEN_H+310)*affichage_info->zoom);
 
     afficher_ville (ville, affichage_info);
 

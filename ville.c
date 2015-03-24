@@ -43,10 +43,10 @@ void afficher_ville (t_ville* ville, t_affichage* affichage_info)
 
     if (x<0)
         x=0;
-    if (x>LARGEUR_PLATEAU-1)
-        x=LARGEUR_PLATEAU-1;
-    if (y>HAUTEUR_PLATEAU-1)
-        y=HAUTEUR_PLATEAU-1;
+    if (x>LARGEUR_PLATEAU)
+        x=LARGEUR_PLATEAU;
+    if (y>HAUTEUR_PLATEAU)
+        y=HAUTEUR_PLATEAU;
     //printf("x: %d - %d   y: %d - %d  zoom: %f  -  depX : %d  -  depY : %d\n", ville->coord_X, x,ville->coord_Y, y, affichage_info->zoom, affichage_info->depX, affichage_info->depY);
 
     premiere_case_X = affichage_info->depX/TAILLE_CASE;
@@ -61,8 +61,10 @@ void afficher_ville (t_ville* ville, t_affichage* affichage_info)
     {
         for (ville->coord_Y=premiere_case_Y; ville->coord_Y < y ; ville->coord_Y++)
         {
+
             origine_x = (TAILLE_CASE*ville->coord_X-affichage_info->depX)*affichage_info->zoom;
             origine_y = (TAILLE_CASE*ville->coord_Y-affichage_info->depY)*affichage_info->zoom;
+
             //printf ("\n%d  -  %d\n%d  -  %d\n\n", origine_x, origine_y, ville->coord_X, ville->coord_Y);
             //printf("x: %d  -  y: %d  -  zoom: %f\n", x, y, affichage_info->zoom);
             afficher_case_matrice(ville->plateau[ville->coord_X][ville->coord_Y], origine_x, origine_y, affichage_info);
