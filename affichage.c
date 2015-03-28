@@ -52,12 +52,11 @@ void affichage (t_ville* ville, t_affichage* affichage_info, t_construction* con
     afficher_construction_en_cours (ville, affichage_info, construction);
 
     affichage_barre_outil    ();
-    //afficher_temps_allegro ();
+
     if (key[KEY_B])
         blit (buffer_image, buffer, 0, 0,0,0, SCREEN_W, SCREEN_H);
-    actualiser_coord (ville, affichage_info);
-    //blit (buffer, screen, depX, depY,0,0, SCREEN_W, SCREEN_H);
-    //stretch_blit(buffer, screen, depX, depY, zoom*SCREEN_W, zoom*SCREEN_H, 0, 0, SCREEN_W, SCREEN_H);
+    actualiser_coord (ville, affichage_info);//stretch_blit(buffer, screen, depX, depY, zoom*SCREEN_W, zoom*SCREEN_H, 0, 0, SCREEN_W, SCREEN_H);
+    afficher_temps_allegro ();
     blit (buffer, screen, 0,0,0,0, SCREEN_W, SCREEN_H);
 }
 

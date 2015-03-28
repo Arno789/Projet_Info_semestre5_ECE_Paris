@@ -11,12 +11,11 @@
 */
 typedef struct bat
 {
+    BITMAP* image_bat;
     int consommation_eau;
     int consommation_elec;
-    ///int rejet_dechet;
-    ///int rejet_pollution;
-    BITMAP* image_bat;
     char type;
+    int taille;
 }t_bat;
 
 
@@ -43,6 +42,9 @@ typedef struct ville
 {
     int population;
     t_case*** plateau;
+    int **gestion_eau;
+    int **gestion_elec;
+    int **plan_construction; //tableau de int qui indique si les cases sont bonnes pour la construction : 0 pour un imcapcité de construire, 1 pour un terrai dégagé, et 2 pour la proximité a une route (obligatoire pour la construction);
     int flouz;
     int coord_X;
     int coord_Y;

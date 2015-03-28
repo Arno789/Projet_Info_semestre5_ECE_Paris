@@ -6,13 +6,22 @@ void init_ville(t_ville* ville)
     ville->flouz=FLOUZ_INITIAL;
     ville->population=0;
     ville->plateau = malloc(LARGEUR_PLATEAU*sizeof(t_case**));
+    ville->gestion_eau = malloc(LARGEUR_PLATEAU*sizeof(int*));
+    ville->gestion_elec = malloc(LARGEUR_PLATEAU*sizeof(int*));
+    ville->plan_construction = malloc(LARGEUR_PLATEAU*sizeof(int*));
     for (ville->coord_X=0 ; ville->coord_X<LARGEUR_PLATEAU ; ville->coord_X++)
     {
         ville->plateau [ville->coord_X] = malloc(HAUTEUR_PLATEAU*sizeof(t_case*));
+        ville->gestion_eau[ville->coord_X] = malloc(LARGEUR_PLATEAU*sizeof(int));
+        ville->gestion_elec[ville->coord_X] = malloc(LARGEUR_PLATEAU*sizeof(int));
+        ville->plan_construction[ville->coord_X] = malloc(LARGEUR_PLATEAU*sizeof(int));
         for (ville->coord_Y=0 ; ville->coord_Y<HAUTEUR_PLATEAU ; ville->coord_Y++)
         {
             ville->plateau[ville->coord_X][ville->coord_Y] = malloc(sizeof (t_case));
             ville->plateau[ville->coord_X][ville->coord_Y] = init_case(ville->plateau[ville->coord_X][ville->coord_Y]);
+            ville->gestion_eau[ville->coord_X][ville->coord_Y] = 0;
+            ville->gestion_elec[ville->coord_X][ville->coord_Y] = 0;
+            ville->plan_construction[ville->coord_X][ville->coord_Y] = 1;
         }
     }
 }

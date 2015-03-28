@@ -9,6 +9,7 @@ t_case* init_case (t_case* tcase)
     tcase->hapiness=0;
     tcase->bat->consommation_eau=0;
     tcase->bat->consommation_elec=0;
+    tcase->bat->taille=0;
     tcase->bat->image_bat=NULL;
     tcase->bat->type='n';
     return tcase;

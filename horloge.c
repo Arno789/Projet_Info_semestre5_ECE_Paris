@@ -49,7 +49,7 @@ void temps (clock_t t1)
 }
 
 
-void afficher_temps_allegro (t_affichage* affichage_info)
+void afficher_temps_allegro ()
 {
     int t,x,i;
     t=0;
@@ -75,7 +75,7 @@ void afficher_temps_allegro (t_affichage* affichage_info)
             break;
         }
         t=t+15;
-        masked_blit (horloge_image, buffer, x, 0, 10+t+affichage_info->depX, SCREEN_H-40+affichage_info->depY, 12, 55);
+        masked_blit (horloge_image, buffer, x, 0, 10+t, SCREEN_H-40, 12, 55);
 
     }
 }
