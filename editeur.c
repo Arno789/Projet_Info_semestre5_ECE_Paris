@@ -42,8 +42,10 @@ void traitement_clique (t_ville* ville, t_construction* construction)
         test_constru=0;
         construction->case_a_construire= creer_route();
         break;
-    case 0xff00ff:
-        printf("255,0,255\n");
+    case 0x0000c8:
+        printf("centrale elec\n");
+        construction->construction=1;
+        construction->case_a_construire= creer_centrale();
         break;
     case 0x00ffff:
         printf("0,255,255\n");

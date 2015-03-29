@@ -15,6 +15,7 @@ void placement (t_ville* ville, t_construction* construction);
 t_case* creer_maison ();
 t_case* creer_commerce ();
 t_case* creer_industrie ();
+t_case* creer_centrale ();
 
 
 #endif // CONSTRUCTION_H_INCLUDED

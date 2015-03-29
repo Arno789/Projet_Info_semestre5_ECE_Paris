@@ -57,7 +57,7 @@ void verification_sortie(t_construction* construction)
 int main()
 {
     t_ville* ville= malloc (sizeof (t_ville));
-    t_affichage* affichage_info= malloc( sizeof (t_affichage));
+    t_affichage* affichage_info=malloc( sizeof (t_affichage));
     t_construction* construction=malloc(sizeof(t_construction));
     init_all(ville, affichage_info, construction);
     clock_t t1;
@@ -66,10 +66,10 @@ int main()
     while (!sortie)
     {
         rafraichir_clavier_souris();
-        verification_sortie(construction);
         traitement_clique(ville, construction);
         temps(t1);
         affichage (ville, affichage_info, construction);
+        verification_sortie(construction);
         rest (20);
     }
     return 0;

@@ -33,10 +33,23 @@ void afficher_case_matrice()
 
 void afficher_case_matrice(t_case* tcase, int x, int y, t_affichage* affichage_info)
 {
-    //printf("%p  -  %p",tcase, tcase->bat);
     if (tcase->bat->image_bat)
     {
-        stretch_sprite (buffer, tcase->bat->image_bat, x, y, TAILLE_CASE*affichage_info->zoom, TAILLE_CASE*affichage_info->zoom);
+        stretch_sprite (buffer, tcase->bat->image_bat, x, y, tcase->bat->taille*TAILLE_CASE*affichage_info->zoom, tcase->bat->taille*TAILLE_CASE*affichage_info->zoom);
     }
+}
 
+void afficher_case_grille_construction (t_ville* ville, int x, int y, t_affichage* affichage_info)
+{
+    int col;
+    if (!ville->plan_construction[ville->coord_X][ville->coord_Y])
+        col = makecol (150,20,30);
+    else if (ville->plan_construction[ville->coord_X][ville->coord_Y]==1)
+        col = makecol (0,200,30);
+    else if (ville->plan_construction[ville->coord_X][ville->coord_Y]==2)
+        col = makecol (0,30,200);
+
+    if (ville->plateau[ville->coord_X][ville->coord_Y]->bat->type=='r')
+        col = makecol (100,100,100);
+    rectfill (buffer, x, y, TAILLE_CASE*affichage_info->zoom+x,TAILLE_CASE*affichage_info->zoom+y, col);
 }

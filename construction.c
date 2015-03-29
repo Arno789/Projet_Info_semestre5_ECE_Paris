@@ -57,6 +57,25 @@ t_case* creer_industrie ()
 }
 
 
+t_case* creer_centrale ()
+{
+    t_case* case_cree;
+    case_cree = malloc (sizeof (t_case));
+    case_cree->construction=1;
+    case_cree->densite=0;
+    case_cree->hapiness=0;
+    case_cree->bat = malloc(sizeof (t_bat));
+    case_cree->bat->consommation_eau = CSMA_EAU_CENTRALE_LV1;
+    case_cree->bat->consommation_elec = PRODU_ELEC_CENTRALE_LV1;
+    case_cree->bat->taille =3;
+    case_cree->bat->image_bat = centrale_lv1;
+    //case_cree->bat->image_bat = NULL;
+    case_cree->bat->type = 'e';
+    return case_cree;
+}
+
+
+
 void init_construction (t_construction* construction)
 {
     construction->case_a_construire=NULL;
@@ -88,6 +107,7 @@ return route&&espace;
 void placement (t_ville* ville, t_construction* construction)
 {
     int condition = 0;
+    int x,y;
     condition = condition_placement (ville, construction);
 
     if (!ville->plateau [ville->coord_X][ville->coord_Y]->construction && mouse_click && condition)
@@ -95,7 +115,10 @@ void placement (t_ville* ville, t_construction* construction)
         ville->plateau [ville->coord_X][ville->coord_Y]=construction->case_a_construire;
         ville->gestion_eau [ville->coord_X][ville->coord_Y] = construction->case_a_construire->bat->consommation_eau;
         ville->gestion_elec [ville->coord_X][ville->coord_Y] = construction->case_a_construire->bat->consommation_elec;
-        ville->plan_construction [ville->coord_X][ville->coord_Y]=0;
+        for (x=ville->coord_X ; x<ville->coord_X+construction->case_a_construire->bat->taille ; x++)
+            for (y=ville->coord_Y ; y<ville->coord_Y+construction->case_a_construire->bat->taille ; y++)
+             ville->plan_construction [x][y]=0;
+
         if (construction->case_a_construire->bat->type=='r' && ville->coord_X>0 && ville->plan_construction [ville->coord_X-1][ville->coord_Y]!=0)
             ville->plan_construction [ville->coord_X-1][ville->coord_Y]=2;
 
@@ -120,6 +143,6 @@ void afficher_construction_en_cours (t_ville* ville, t_affichage* affichage_info
     {
         if (!ville->plateau [ville->coord_X][ville->coord_Y]->construction)
             if (construction->case_a_construire->bat->image_bat!=NULL)
-                stretch_sprite(buffer, construction->case_a_construire->bat->image_bat, (TAILLE_CASE*ville->coord_X-affichage_info->depX)*affichage_info->zoom, (TAILLE_CASE*ville->coord_Y-affichage_info->depY)*affichage_info->zoom, TAILLE_CASE*affichage_info->zoom, TAILLE_CASE*affichage_info->zoom);
+                stretch_sprite(buffer, construction->case_a_construire->bat->image_bat, (TAILLE_CASE*ville->coord_X-affichage_info->depX)*affichage_info->zoom, (TAILLE_CASE*ville->coord_Y-affichage_info->depY)*affichage_info->zoom, construction->case_a_construire->bat->taille*TAILLE_CASE*affichage_info->zoom, construction->case_a_construire->bat->taille*TAILLE_CASE*affichage_info->zoom);
     }
 }

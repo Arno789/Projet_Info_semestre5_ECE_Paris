@@ -76,7 +76,9 @@ void afficher_ville (t_ville* ville, t_affichage* affichage_info)
 
             //printf ("\n%d  -  %d\n%d  -  %d\n\n", origine_x, origine_y, ville->coord_X, ville->coord_Y);
             //printf("x: %d  -  y: %d  -  zoom: %f\n", x, y, affichage_info->zoom);
-            afficher_case_matrice(ville->plateau[ville->coord_X][ville->coord_Y], origine_x, origine_y, affichage_info);
+            if (key[KEY_C])
+                afficher_case_grille_construction (ville, origine_x, origine_y, affichage_info);
+            else afficher_case_matrice(ville->plateau[ville->coord_X][ville->coord_Y], origine_x, origine_y, affichage_info);
         }
     }
 }

@@ -1,7 +1,7 @@
 #ifndef AFFICHAGE_H_INCLUDED
 #define AFFICHAGE_H_INCLUDED
-#define SCREEN_LARGEUR 800
-#define SCREEN_HAUTEUR 600
+#define SCREEN_LARGEUR 1024
+#define SCREEN_HAUTEUR 768
 #define TAILLE_CASE 20
 #define HAUTEUR_BO_BAT 138
 #define HAUTEUR_BO 70
@@ -19,8 +19,10 @@ extern BITMAP* boconst;
 extern BITMAP* im_commerce_lv1;
 extern BITMAP* im_maison_lv1;
 extern BITMAP* im_industrie_lv1;
+extern BITMAP* centrale_lv1;
 extern BITMAP* bo_couleur;
 extern BITMAP* bo;
+
 
 typedef struct affichage_info
 {
@@ -35,6 +37,7 @@ void initialiser_allegro();
 void init_affichage_info (t_affichage* affichage_info);
 void afficher_construction_en_cours (t_ville* ville, t_affichage* affichage_info, t_construction* construction);     ///Affichage de la fonction drag and drop lors d'une construction
 void afficher_case_matrice(t_case* tcase, int x, int y, t_affichage* affichage_info);                   ///Affiche une case sur le buffer
+void afficher_case_grille_construction (t_ville* ville, int x, int y, t_affichage* affichage_info);
 
 
 void affichage (t_ville* ville, t_affichage* affichage_info, t_construction* construction); /// Sous programme principal de l'affichage : appel dans l'ordre souhaité de tous les autres SP d'affichage

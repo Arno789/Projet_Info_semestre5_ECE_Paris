@@ -13,6 +13,7 @@ t_case* creer_route ()
     case_cree->bat->image_bat = chargerImage("route.bmp");
     //case_cree->bat->image_bat = NULL;
     case_cree->bat->type = 'r';
+    case_cree->bat->taille=1;
     return case_cree;
 }
 

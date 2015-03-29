@@ -8,5 +8,4 @@ t_case* init_case (t_case* t_case);
 
 
 
-
 #endif // CASE_H_INCLUDED
