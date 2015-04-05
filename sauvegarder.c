@@ -9,7 +9,7 @@ void sauver_partie()
 
     char nom[56];   //les 5 lettres de .carl et le \0
 
-    buffer_sauv=create_bitmap(SCREEN_LARGEUR,SCREEN_HAUTEUR);
+    buffer_sauv=create_bitmap(SCREEN_LARGEUR,SCREEN_HAUTEUR_PLATEAU);
 
     for (i=0; i<57; i++)
     {
@@ -40,7 +40,7 @@ void sauver_partie()
         ///actualisation de l'affichage
         clear_bitmap(buffer_sauv);
         textprintf_centre_ex(buffer_sauv, font, SCREEN_W / 2, 120,makecol(0, 100, 243), -1,"ENTRER LE NOM DE LA SAUVEGARDE : %s.carl\n50lettres maxi\n",nom);
-        blit(buffer_sauv,screen, 0, 0, 0, 0,SCREEN_LARGEUR, SCREEN_HAUTEUR);
+        blit(buffer_sauv,screen, 0, 0, 0, 0,SCREEN_LARGEUR, SCREEN_HAUTEUR_PLATEAU);
     }
     while (!key[KEY_ENTER] && strlen(nom)<50);
 

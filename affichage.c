@@ -12,6 +12,12 @@ BITMAP* im_commerce_lv1=NULL;
 BITMAP* im_maison_lv1=NULL;
 BITMAP* im_industrie_lv1=NULL;
 BITMAP* centrale_lv1 = NULL;
+BITMAP* im_route_1 = NULL;
+BITMAP* im_route_2 = NULL;
+BITMAP* im_route_3 = NULL;
+BITMAP* im_route_4 = NULL;
+BITMAP* im_route_d = NULL;
+
 
 void initialiser_allegro()
 {
@@ -21,7 +27,7 @@ void initialiser_allegro()
     install_mouse();
 
     set_color_depth(desktop_color_depth());
-    if (set_gfx_mode(GFX_AUTODETECT_WINDOWED,SCREEN_LARGEUR,SCREEN_HAUTEUR,0,0)!=0)
+    if (set_gfx_mode(GFX_AUTODETECT_WINDOWED,SCREEN_LARGEUR,SCREEN_HAUTEUR_PLATEAU,0,0)!=0)
     {
         allegro_message("prb gfx mode");
         allegro_exit();
@@ -48,7 +54,7 @@ void affichage (t_ville* ville, t_affichage* affichage_info, t_construction* con
         stretch_blit(terrain_jeu, buffer, affichage_info->depX+COORD_ORG_PLT_X, affichage_info->depY+COORD_ORG_PLT_Y, SCREEN_W/affichage_info->zoom, SCREEN_H/affichage_info->zoom, 0,0, SCREEN_W, SCREEN_H);
     else stretch_blit(terrain_jeu, buffer, 0, 0, TAILLE_PLT_IMG_W, TAILLE_PLT_IMG_H, 6,6, (SCREEN_W+290)*affichage_info->zoom, (SCREEN_H+310)*affichage_info->zoom);
 
-    afficher_ville (ville, affichage_info);
+
 
     afficher_construction_en_cours (ville, affichage_info, construction);
 
@@ -59,6 +65,7 @@ void affichage (t_ville* ville, t_affichage* affichage_info, t_construction* con
         blit (buffer_image, buffer, 0, 0,0,0, SCREEN_W, SCREEN_H);
     actualiser_coord (ville, affichage_info);//stretch_blit(buffer, screen, depX, depY, zoom*SCREEN_W, zoom*SCREEN_H, 0, 0, SCREEN_W, SCREEN_H);
     afficher_temps_allegro ();
+    afficher_ville (ville, affichage_info);
     blit (buffer, screen, 0,0,0,0, SCREEN_W, SCREEN_H);
 }
 
@@ -69,9 +76,9 @@ void afficher_terrain ()
 
 void affichage_barre_outil ()
 {
-    masked_blit(bo, buffer, 0, 0, 0, SCREEN_H+0-HAUTEUR_BO, SCREEN_W, SCREEN_H);
+    masked_blit(bo, buffer, 0, 0, 0, SCREEN_H+0-HAUTEUR_PLATEAU_BO, SCREEN_W, SCREEN_H);
     if (test_constru)
-        masked_blit(boconst, buffer, 0, 0, 0, SCREEN_H-HAUTEUR_BO_BAT+0, SCREEN_W, SCREEN_H);
+        masked_blit(boconst, buffer, 0, 0, 0, SCREEN_H-HAUTEUR_PLATEAU_BO_BAT+0, SCREEN_W, SCREEN_H);
 }
 
 
@@ -105,6 +112,11 @@ void init_image()
     bo = chargerImage("barre_outils.bmp");
     bo_couleur = chargerImage("barre_outils_couleur.bmp");
     centrale_lv1 = chargerImage ("centrale_lv1.bmp");
+    im_route_1 = chargerImage("route_1.bmp");
+    im_route_2 = chargerImage("route_gb.bmp");
+    im_route_3 = chargerImage("route_3.bmp");
+    im_route_4 = chargerImage("route_4.bmp");
+    im_route_d = chargerImage("route_2.bmp");
 }
 
 void init_buffer_image()
@@ -115,9 +127,9 @@ void init_buffer_image()
 void gerer_buffer_image()
 {
     clear_bitmap (buffer_image);
-    blit (bo_couleur, buffer_image, 0, 0, 0, SCREEN_H-HAUTEUR_BO, SCREEN_W, SCREEN_H);
+    blit (bo_couleur, buffer_image, 0, 0, 0, SCREEN_H-HAUTEUR_PLATEAU_BO, SCREEN_W, SCREEN_H);
     if (test_constru)
-        blit (image_action_bo, buffer_image, 0, 0, 0, SCREEN_H-HAUTEUR_BO_BAT, SCREEN_W, SCREEN_H);
+        blit (image_action_bo, buffer_image, 0, 0, 0, SCREEN_H-HAUTEUR_PLATEAU_BO_BAT, SCREEN_W, SCREEN_H);
 }
 
 

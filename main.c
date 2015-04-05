@@ -4,7 +4,7 @@
 int sortie=0;
 
 
-void init_all (t_ville* ville, t_affichage* affichage_info, t_construction* construction)
+void init_all (t_ville* ville, t_affichage* affichage_info, t_construction* construction, t_info_BFS* info)
 {
     initialiser_allegro();
     buffer = init_buffer(buffer);
@@ -19,6 +19,7 @@ void init_all (t_ville* ville, t_affichage* affichage_info, t_construction* cons
     init_affichage_info (affichage_info);
     init_ville(ville);
     init_construction (construction);
+    init_info (info);
 }
 
 void actualiser_coord (t_ville* ville, t_affichage* affichage_info)
@@ -59,14 +60,17 @@ int main()
     t_ville* ville= malloc (sizeof (t_ville));
     t_affichage* affichage_info=malloc( sizeof (t_affichage));
     t_construction* construction=malloc(sizeof(t_construction));
-    init_all(ville, affichage_info, construction);
+    t_info_BFS* info= malloc(sizeof (t_info_BFS*));
+
+    init_all(ville, affichage_info, construction, info);
     clock_t t1;
     t1 = clock ();
 
     while (!sortie)
     {
         rafraichir_clavier_souris();
-        traitement_clique(ville, construction);
+        actualiser_coord (ville, affichage_info);
+        traitement_clique(ville, construction, info);
         temps(t1);
         affichage (ville, affichage_info, construction);
         verification_sortie(construction);

@@ -22,6 +22,7 @@ void init_ville(t_ville* ville)
             ville->gestion_eau[ville->coord_X][ville->coord_Y] = 0;
             ville->gestion_elec[ville->coord_X][ville->coord_Y] = 0;
             ville->plan_construction[ville->coord_X][ville->coord_Y] = 1;
+            ville->plateau[ville->coord_X][ville->coord_Y]->marqueur = 0;
         }
     }
 }
@@ -29,7 +30,6 @@ void init_ville(t_ville* ville)
 
 void afficher_ville (t_ville* ville, t_affichage* affichage_info)
 {
-    ///A modifier pour n'afficher que le necessaire !
     int x, y;
     int origine_x, origine_y;
     int premiere_case_X, premiere_case_Y;

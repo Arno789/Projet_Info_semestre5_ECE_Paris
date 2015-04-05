@@ -32,7 +32,7 @@ extern int mouse_unclick;                           ///
 extern int key_press[KEY_MAX];                      ///
 extern int key_unpress[KEY_MAX];                    ///
                                                     ///
-                                                    ///
+                                                    ///                                                    ///
 extern int mouse_depx;                              ///
 extern int mouse_depy;                              ///
 
@@ -40,7 +40,7 @@ extern int test_constru;
 
 void rafraichir_clavier_souris();
 
-void traitement_clique (t_ville* ville, t_construction* construction);
+void traitement_clique (t_ville* ville, t_construction* construction, t_info_BFS* info);
 
 
 #endif // EDITEUR_H_INCLUDED

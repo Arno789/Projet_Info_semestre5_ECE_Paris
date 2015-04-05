@@ -1,10 +1,10 @@
 #ifndef AFFICHAGE_H_INCLUDED
 #define AFFICHAGE_H_INCLUDED
-#define SCREEN_LARGEUR 1024
-#define SCREEN_HAUTEUR 768
+#define SCREEN_LARGEUR 800
+#define SCREEN_HAUTEUR_PLATEAU 600
 #define TAILLE_CASE 20
-#define HAUTEUR_BO_BAT 138
-#define HAUTEUR_BO 70
+#define HAUTEUR_PLATEAU_BO_BAT 138
+#define HAUTEUR_PLATEAU_BO 70
 #define TAILLE_PLT_IMG_W 1244
 #define TAILLE_PLT_IMG_H 1008
 #define COORD_ORG_PLT_X 120
@@ -22,6 +22,7 @@ extern BITMAP* im_industrie_lv1;
 extern BITMAP* centrale_lv1;
 extern BITMAP* bo_couleur;
 extern BITMAP* bo;
+
 
 
 typedef struct affichage_info

@@ -12,7 +12,7 @@ int key_unpress[KEY_MAX];
 int mouse_depx;
 int mouse_depy;
 
-void traitement_clique (t_ville* ville, t_construction* construction)
+void traitement_clique (t_ville* ville, t_construction* construction, t_info_BFS* info)
 {
     gerer_buffer_image();
     actualiser_coord ();
@@ -26,7 +26,7 @@ void traitement_clique (t_ville* ville, t_construction* construction)
     switch (col)
     {
     case 0x00c800:
-        printf("mode construction\n");
+        printf("mode construction\n"); ///Donne acces au menu de construction des habitations, commerces et industries
         if (!test_constru)
             test_constru=1;
         else if (test_constru)
@@ -40,7 +40,7 @@ void traitement_clique (t_ville* ville, t_construction* construction)
     case 0xc80000:
         construction->construction=1;
         test_constru=0;
-        construction->case_a_construire= creer_route();
+        construction->creation_route=1;
         break;
     case 0x0000c8:
         printf("centrale elec\n");
@@ -62,7 +62,12 @@ void traitement_clique (t_ville* ville, t_construction* construction)
         break;
     }
     if (construction->construction)
-        placement(ville, construction);
+    {
+        if (construction->creation_route)
+            placement_route (ville, info, construction);
+        else if (!construction->creation_route)
+            placement(ville, construction);
+    }
 }
 
 

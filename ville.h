@@ -6,17 +6,18 @@
 /*
  structure regroupant les batiments "clefs en main" comme les casernes et les chateau d'eau
  ainsi que les terrains vagues qui evoluent
- t_contruction contient leurs APPROVISIONNEMENT, leur TYPE (terrain vague, caserne, chateau, route...)
+ t_construction contient leurs APPROVISIONNEMENT, leur TYPE (terrain vague, caserne, chateau, route...)
  et leur STADE de construction (Terrain vague (0 habitant) ou Ruine en cas de régression (0 habitant)- Cabane (10 habitants)- Maison (50 habitants)- Immeuble (100 habitants)- Gratte-ciel (1000 habitants)
 */
 typedef struct bat
 {
     BITMAP* image_bat;
+    int rotation;
     int consommation_eau;
     int consommation_elec;
     char type;
     int taille;
-}t_bat;
+} t_bat;
 
 
 typedef struct tcase
@@ -25,7 +26,8 @@ typedef struct tcase
     int densite;    /// Population vivant dans le bat en question
     t_bat* bat;     /// On link la structure bat, contenant les infos propre au bat
     short int construction ; ///Booléen : Est ce qu'il y a un batiment / construction sur cette case ?
-}t_case;
+    int marqueur;
+} t_case;
 ///struct CASE
 /*
 élément de base du PLATEAU : contient les infos de la case comme le bonheur, la densité, la CONSTRUCTION
@@ -48,12 +50,12 @@ typedef struct ville
     int flouz;
     int coord_X;
     int coord_Y;
-}t_ville;
+} t_ville;
 
 
 void init_ville(t_ville* ville);
+//void init_info (t_info_BFS* info_BFS);  ///Allocation et initialisation des info pour l'algo
 
-              ///Appelle de facon optimisé le sous programme d'affichage de case.
 
 
 #endif // VILLE_H_INCLUDED
