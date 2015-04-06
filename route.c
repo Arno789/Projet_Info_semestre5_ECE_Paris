@@ -10,27 +10,35 @@ t_case* creer_route ()
     case_cree->bat = malloc(sizeof (t_bat));
     case_cree->bat->consommation_eau = 0;
     case_cree->bat->consommation_elec = 0;
-    case_cree->bat->image_bat = im_route_1;
-    //case_cree->bat->image_bat = NULL;
+    case_cree->bat->image_bat = im_route_n;
     case_cree->bat->type = 'r';
     case_cree->bat->taille=1;
     return case_cree;
 }
 
-void affichage_construction_route (t_ville* ville, t_construction* construction, t_affichage* affichage_info)
+void affichage_construction_route (t_ville* ville, t_construction* construction, t_affichage* affichage_info, t_info_BFS* info)
 {
-    /*int i=0;
-    while (construction->tab_route[i]->image)
+    int x1, y1, x2, y2;
+    if (info->clique)
     {
-        afficher_case_route (ville, construction, affichage_info, i);
-        i++;
-    }*/
-}
 
-void afficher_case_route (t_ville* ville, t_construction* construction, t_affichage* affichage_info, int i)
-{
-    /*printf ("*");
-    stretch_sprite (buffer, construction->tab_route[i]->image, TAILLE_CASE*ville->coord_X, TAILLE_CASE*ville->coord_Y, TAILLE_CASE*affichage_info->zoom, TAILLE_CASE*affichage_info->zoom);*/
+        x1 = info->depart->x*TAILLE_CASE*affichage_info->zoom-affichage_info->depX+5;
+        y1 = info->depart->y*TAILLE_CASE*affichage_info->zoom-affichage_info->depY+5;
+        if (x1<0)
+            x1=0;
+        if (x1>SCREEN_W)
+            x1 = SCREEN_W;
+        if (y1<0)
+            y1=0;
+        if (y1>SCREEN_H)
+            y1 = SCREEN_H;
+
+        x2 = mouse_x;
+        y2 = mouse_y;
+
+        line (buffer, x1, y1, x2, y2, makecol(255,0,0));
+    }
+
 }
 
 
@@ -76,7 +84,7 @@ void algorithme (t_ville* ville, t_info_BFS* info) ///Attention ca pique les yeu
             ///Les quatre grand 'if' suivant sont l'analyse des points directement voisins (gauche, droite, haut, bas) du point en cours d'analyse
             /// Le point en cors d'analyse est sélectionné dans 'tab', les réultats de ces analyses sont eux stocké dans tab2
             if (tab[i]->x-1>0)
-                if (ville->plan_construction[tab[i]->x-1][tab[i]->y] && ville->plateau[tab[i]->x-1][tab[i]->y]->marqueur == 0) //Si un liaison est possible, -> s'il n'y a pas de construction
+                if ((ville->plan_construction[tab[i]->x-1][tab[i]->y] || ville->plateau[tab[i]->x-1][tab[i]->y]->bat->type=='r') && ville->plateau[tab[i]->x-1][tab[i]->y]->marqueur == 0) //Si un liaison est possible, -> s'il n'y a pas de construction
                 {
                     ///Si on repasse par dessus une route, devons nous compter le surplus de case (si on passe sur une route, on ne créé pas de route en plus de celle existante, pourtant la distance évolue quand même)
                     //if (ville->plan_construction[tab[i]->x-1][tab[i]->y]==1)
@@ -92,7 +100,7 @@ void algorithme (t_ville* ville, t_info_BFS* info) ///Attention ca pique les yeu
 
             if (tab[i]->y-1>0)
             {
-                if (ville->plan_construction[tab[i]->x][tab[i]->y-1] && ville->plateau[tab[i]->x][tab[i]->y-1]->marqueur == 0) //Si un liaison est possible, -> s'il n'y a pas de construction
+                if ((ville->plan_construction[tab[i]->x][tab[i]->y-1] || ville->plateau[tab[i]->x][tab[i]->y-1]->bat->type=='r') && ville->plateau[tab[i]->x][tab[i]->y-1]->marqueur == 0) //Si un liaison est possible, -> s'il n'y a pas de construction
                 {
                     //if (ville->plan_construction[tab[i]->x][tab[i]->y-1]==1)
                     info->l[tab[i]->x][tab[i]->y-1] = info->l[tab[i]->x][tab[i]->y] + 1;
@@ -108,7 +116,7 @@ void algorithme (t_ville* ville, t_info_BFS* info) ///Attention ca pique les yeu
 
             if (tab[i]->x+1<LARGEUR_PLATEAU)
             {
-                if (ville->plan_construction[tab[i]->x+1][tab[i]->y] && ville->plateau[tab[i]->x+1][tab[i]->y]->marqueur == 0) //Si un liaison est possible, -> s'il n'y a pas de construction
+                if ((ville->plan_construction[tab[i]->x+1][tab[i]->y] || ville->plateau[tab[i]->x+1][tab[i]->y]->bat->type=='r') && ville->plateau[tab[i]->x+1][tab[i]->y]->marqueur == 0) //Si un liaison est possible, -> s'il n'y a pas de construction
                 {
                     //if (ville->plan_construction[tab[i]->x+1][tab[i]->y]==1)
                     info->l[tab[i]->x+1][tab[i]->y] = info->l[tab[i]->x][tab[i]->y] + 1;
@@ -124,7 +132,7 @@ void algorithme (t_ville* ville, t_info_BFS* info) ///Attention ca pique les yeu
 
             if (tab[i]->y+1<HAUTEUR_PLATEAU)
             {
-                if (ville->plan_construction[tab[i]->x][tab[i]->y+1] && ville->plateau[tab[i]->x][tab[i]->y+1]->marqueur == 0) //Si un liaison est possible, -> s'il n'y a pas de construction
+                if ((ville->plan_construction[tab[i]->x][tab[i]->y+1] || ville->plateau[tab[i]->x][tab[i]->y+1]->bat->type=='r')&& ville->plateau[tab[i]->x][tab[i]->y+1]->marqueur == 0) //Si un liaison est possible, -> s'il n'y a pas de construction
                 {
                     //if (ville->plan_construction[tab[i]->x][tab[i]->y+1]==1)
                     info->l[tab[i]->x][tab[i]->y+1] = info->l[tab[i]->x][tab[i]->y] + 1;
@@ -174,7 +182,7 @@ void algorithme (t_ville* ville, t_info_BFS* info) ///Attention ca pique les yeu
         sortie =0;
         ville->plateau[x][y]->construction=2;
         ville->plateau[x][y]->bat->type = 'r';
-
+        ville->plan_construction[x][y] = 0;
         while (!sortie)
         {
 ///On va refaire le chemin inverse en parcourant le tabelau 'perd' qui contient les coordonnées de la case mère de chaque case, jusqu'à ce qu'on revienne à la case de départ
@@ -187,6 +195,7 @@ void algorithme (t_ville* ville, t_info_BFS* info) ///Attention ca pique les yeu
             }
             ville->plateau[x][y]->construction=2;
             ville->plateau[x][y]->bat->type = 'r';
+            ville->plan_construction[x][y] = 0;
             printf("*"); ///Affichage d'une étoile pour chaque route créée (oui, ceci ne sert à rien , c'est juste joli)
             if (x==info->depart->x && y==info->depart->y) ///Tant qu'on n'est pas revenu à notre point de départ, on reste dans la boucle
                 sortie=1;

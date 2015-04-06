@@ -23,6 +23,7 @@ extern BITMAP* im_route_2;
 extern BITMAP* im_route_3;
 extern BITMAP* im_route_4;
 extern BITMAP* im_route_d;
+extern BITMAP* im_route_n;
 
 typedef struct info
 {

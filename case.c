@@ -36,8 +36,7 @@ void afficher_case_matrice(t_case* tcase, int x, int y, t_affichage* affichage_i
     if (tcase->bat->image_bat)
     {
         //stretch_sprite (buffer, tcase->bat->image_bat, x, y, tcase->bat->taille*TAILLE_CASE*affichage_info->zoom, tcase->bat->taille*TAILLE_CASE*affichage_info->zoom);
-        rotate_sprite(buffer, tcase->bat->image_bat, x, y, tcase->bat->rotation);
-        printf("%d ", tcase->bat->rotation);
+        rotate_scaled_sprite(buffer, tcase->bat->image_bat, x, y, itofix (tcase->bat->rotation), ftofix (affichage_info->zoom));
         //draw_sprite (buffer, tcase->bat->image_bat, x, y);
     }
 }

@@ -60,9 +60,9 @@ int main()
     t_ville* ville= malloc (sizeof (t_ville));
     t_affichage* affichage_info=malloc( sizeof (t_affichage));
     t_construction* construction=malloc(sizeof(t_construction));
-    t_info_BFS* info= malloc(sizeof (t_info_BFS*));
+    t_info_BFS* info_algo= malloc(sizeof (t_info_BFS*));
 
-    init_all(ville, affichage_info, construction, info);
+    init_all(ville, affichage_info, construction, info_algo);
     clock_t t1;
     t1 = clock ();
 
@@ -70,9 +70,9 @@ int main()
     {
         rafraichir_clavier_souris();
         actualiser_coord (ville, affichage_info);
-        traitement_clique(ville, construction, info);
+        traitement_clique(ville, construction, info_algo);
         temps(t1);
-        affichage (ville, affichage_info, construction);
+        affichage (ville, affichage_info, construction, info_algo);
         verification_sortie(construction);
         rest (20);
     }

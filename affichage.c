@@ -17,6 +17,7 @@ BITMAP* im_route_2 = NULL;
 BITMAP* im_route_3 = NULL;
 BITMAP* im_route_4 = NULL;
 BITMAP* im_route_d = NULL;
+BITMAP* im_route_n = NULL;
 
 
 void initialiser_allegro()
@@ -27,7 +28,7 @@ void initialiser_allegro()
     install_mouse();
 
     set_color_depth(desktop_color_depth());
-    if (set_gfx_mode(GFX_AUTODETECT_WINDOWED,SCREEN_LARGEUR,SCREEN_HAUTEUR_PLATEAU,0,0)!=0)
+    if (set_gfx_mode(GFX_AUTODETECT_WINDOWED,SCREEN_LARGEUR,SCREEN_HAUTEUR,0,0)!=0)
     {
         allegro_message("prb gfx mode");
         allegro_exit();
@@ -45,7 +46,7 @@ void init_affichage_info (t_affichage* affichage_info)
     affichage_info->zoom = 1;
 }
 
-void affichage (t_ville* ville, t_affichage* affichage_info, t_construction* construction)
+void affichage (t_ville* ville, t_affichage* affichage_info, t_construction* construction, t_info_BFS* info)
 {
     gerer_zoom (affichage_info);
     clear_bitmap (buffer);
@@ -54,9 +55,10 @@ void affichage (t_ville* ville, t_affichage* affichage_info, t_construction* con
         stretch_blit(terrain_jeu, buffer, affichage_info->depX+COORD_ORG_PLT_X, affichage_info->depY+COORD_ORG_PLT_Y, SCREEN_W/affichage_info->zoom, SCREEN_H/affichage_info->zoom, 0,0, SCREEN_W, SCREEN_H);
     else stretch_blit(terrain_jeu, buffer, 0, 0, TAILLE_PLT_IMG_W, TAILLE_PLT_IMG_H, 6,6, (SCREEN_W+290)*affichage_info->zoom, (SCREEN_H+310)*affichage_info->zoom);
 
+    afficher_ville (ville, affichage_info);
 
+    afficher_construction_en_cours (ville, affichage_info, construction, info);
 
-    afficher_construction_en_cours (ville, affichage_info, construction);
 
     if (!construction->construction)
         affichage_barre_outil();
@@ -65,7 +67,7 @@ void affichage (t_ville* ville, t_affichage* affichage_info, t_construction* con
         blit (buffer_image, buffer, 0, 0,0,0, SCREEN_W, SCREEN_H);
     actualiser_coord (ville, affichage_info);//stretch_blit(buffer, screen, depX, depY, zoom*SCREEN_W, zoom*SCREEN_H, 0, 0, SCREEN_W, SCREEN_H);
     afficher_temps_allegro ();
-    afficher_ville (ville, affichage_info);
+
     blit (buffer, screen, 0,0,0,0, SCREEN_W, SCREEN_H);
 }
 
@@ -117,6 +119,7 @@ void init_image()
     im_route_3 = chargerImage("route_3.bmp");
     im_route_4 = chargerImage("route_4.bmp");
     im_route_d = chargerImage("route_2.bmp");
+    im_route_n = chargerImage("route.bmp");
 }
 
 void init_buffer_image()

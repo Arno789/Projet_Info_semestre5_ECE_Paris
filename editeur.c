@@ -15,7 +15,7 @@ int mouse_depy;
 void traitement_clique (t_ville* ville, t_construction* construction, t_info_BFS* info)
 {
     gerer_buffer_image();
-    actualiser_coord ();
+    ///actualiser_coord ();
     int col=-1;
     if (mouse_click && !construction->construction)
     {
@@ -38,6 +38,8 @@ void traitement_clique (t_ville* ville, t_construction* construction, t_info_BFS
         construction->case_a_construire= creer_maison();
         break;
     case 0xc80000:
+
+        construction->case_a_construire = creer_route();
         construction->construction=1;
         test_constru=0;
         construction->creation_route=1;

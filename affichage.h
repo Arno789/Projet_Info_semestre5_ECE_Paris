@@ -1,7 +1,7 @@
 #ifndef AFFICHAGE_H_INCLUDED
 #define AFFICHAGE_H_INCLUDED
-#define SCREEN_LARGEUR 800
-#define SCREEN_HAUTEUR_PLATEAU 600
+#define SCREEN_LARGEUR 1024
+#define SCREEN_HAUTEUR 768
 #define TAILLE_CASE 20
 #define HAUTEUR_PLATEAU_BO_BAT 138
 #define HAUTEUR_PLATEAU_BO 70
@@ -36,12 +36,13 @@ void afficher_ville (t_ville* ville, t_affichage* affichage_info);
 void initialiser_allegro();
 
 void init_affichage_info (t_affichage* affichage_info);
-void afficher_construction_en_cours (t_ville* ville, t_affichage* affichage_info, t_construction* construction);     ///Affichage de la fonction drag and drop lors d'une construction
+void afficher_construction_en_cours (t_ville* ville, t_affichage* affichage_info, t_construction* construction, t_info_BFS* info);     ///Affichage de la fonction drag and drop lors d'une construction
 void afficher_case_matrice(t_case* tcase, int x, int y, t_affichage* affichage_info);                   ///Affiche une case sur le buffer
 void afficher_case_grille_construction (t_ville* ville, int x, int y, t_affichage* affichage_info);
+void affichage_construction_route (t_ville* ville, t_construction* construction, t_affichage* affichage_info, t_info_BFS* info);
 
 
-void affichage (t_ville* ville, t_affichage* affichage_info, t_construction* construction); /// Sous programme principal de l'affichage : appel dans l'ordre souhaité de tous les autres SP d'affichage
+void affichage (t_ville* ville, t_affichage* affichage_info, t_construction* construction, t_info_BFS* info); /// Sous programme principal de l'affichage : appel dans l'ordre souhaité de tous les autres SP d'affichage
 BITMAP *chargerImage(char *nomFichierImage);    ///SP utilisé pour charger toutes les images
 BITMAP* init_buffer (BITMAP* buffer);           ///Utilité limité
 void gerer_zoom ();                             ///Calcul le zoom en fct° de la position de la molette
