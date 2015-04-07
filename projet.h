@@ -14,8 +14,8 @@
 #include "case.h"
 
 #include "affichage.h"
-///#include "sauvegarder.h"
-///#include "charger.h"
+#include "sauvegarder.h"
+#include "charger.h"
 
 
 extern int acceleration; ///Variable globale controlant la rapiditée du temps

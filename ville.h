@@ -50,6 +50,9 @@ typedef struct ville
     int flouz;
     int coord_X;
     int coord_Y;
+    int prec_X;
+    int prec_Y;
+    int changement_case;
 } t_ville;
 
 

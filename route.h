@@ -38,7 +38,7 @@ void algorithme (t_ville* ville, t_info_BFS* info);  ///Le fameux et l'unique
 void init_info (t_info_BFS* info); ///Allocation et initialisation des info pour l'algo
 void reset_info (t_info_BFS* info, t_ville* ville); ///A la fin de l'algorithme suppression (reset) des variable devenues inutiles
 void init_tab (t_point* tab [100]); ///Initialisation d'un tableau de 100 points
-
+void update_route (t_ville* ville);
 
 
 

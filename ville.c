@@ -3,6 +3,8 @@
 
 void init_ville(t_ville* ville)
 {
+    ville->prec_X=0;
+    ville->prec_Y=0;
     ville->flouz=FLOUZ_INITIAL;
     ville->population=0;
     ville->plateau = malloc(LARGEUR_PLATEAU*sizeof(t_case**));

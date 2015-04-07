@@ -54,7 +54,6 @@ void algorithme (t_ville* ville, t_info_BFS* info) ///Attention ca pique les yeu
     int sortie=0;
     int i, j;
     int x, y;
-    int compteur_secu = 0;
 
     init_tab (tab);   ///On s'assure que tout est bien prèt avant de lancer l'algorithme
     init_tab (tab2);    ///
@@ -70,15 +69,9 @@ void algorithme (t_ville* ville, t_info_BFS* info) ///Attention ca pique les yeu
 
     while (!sortie)
     {
-        compteur_secu++; ///Si apres avoir fait toutes les possibilité la rechercher n'a rien donné ...
-        if (compteur_secu > LARGEUR_PLATEAU * HAUTEUR_PLATEAU)
-        {
-            allegro_message(" Aucun chemin n'a put etre trouve !");
-            sortie = 666; ///SATAN
-        }
-
         i=0; ///Re initialisation des variables
         j=0;
+
         while (tab[i]!=NULL)
         {
             ///Les quatre grand 'if' suivant sont l'analyse des points directement voisins (gauche, droite, haut, bas) du point en cours d'analyse
@@ -170,11 +163,16 @@ void algorithme (t_ville* ville, t_info_BFS* info) ///Attention ca pique les yeu
             i++;
             tab[i]=NULL;
         }
+        if (!tab2[0]) ///S'il n'y a plus de nouvelles données et qu'on est toujours dans la boucle ...
+            {
+                sortie=sortie + 666; ///SATAN
+                printf ("Erreur aucune route possible\n");
+            }
         init_tab(tab2);
     }
 
     if (sortie != 666) ///Si l'algorithme a reussi a trouver un chemin :
-    {
+        {
         printf("\nDistance minimum : %d\n", info->l[info->arrive->x][info->arrive->y]);
 
         x=info->arrive->x;
@@ -203,6 +201,13 @@ void algorithme (t_ville* ville, t_info_BFS* info) ///Attention ca pique les yeu
         }
         printf ("\n");
     }
+    update_route(ville);
+        ///FIN DE L' ALGO
+}
+
+void update_route (t_ville* ville)
+{
+    int x, y, i;
 
     for (x=0 ; x<LARGEUR_PLATEAU ; x++)
     {
@@ -230,7 +235,6 @@ void algorithme (t_ville* ville, t_info_BFS* info) ///Attention ca pique les yeu
             }
         }
     }
-    ///FIN DE L' ALGO
 }
 
 

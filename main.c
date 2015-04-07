@@ -26,7 +26,6 @@ void actualiser_coord (t_ville* ville, t_affichage* affichage_info)
 {
     ville->coord_X=(mouse_x + affichage_info->zoom * affichage_info->depX)/TAILLE_CASE/affichage_info->zoom; ///Déduit avec le théorème "de la grosse chatte de 00h18" ...
     ville->coord_Y=(mouse_y + affichage_info->zoom * affichage_info->depY)/TAILLE_CASE/affichage_info->zoom;
-
     if (ville->coord_X<0)
         ville->coord_X=0;
     if (ville->coord_Y<0)
@@ -36,8 +35,20 @@ void actualiser_coord (t_ville* ville, t_affichage* affichage_info)
         ville->coord_Y=HAUTEUR_PLATEAU-1;
     if (ville->coord_X>LARGEUR_PLATEAU-1)
         ville->coord_X=LARGEUR_PLATEAU-1;
-        //printf("X: %d - Y: %d\tmouse_x: %d - mouse_y: %d  \tdepX: %d - depY: %d\n", ville->coord_X, ville->coord_Y, mouse_x, mouse_y, affichage_info->depX, affichage_info->depY);
-        //printf("zoom : %f\n", affichage_info->zoom);
+    //printf("X: %d - Y: %d\tmouse_x: %d - mouse_y: %d  \tdepX: %d - depY: %d\n", ville->coord_X, ville->coord_Y, mouse_x, mouse_y, affichage_info->depX, affichage_info->depY);
+    //printf("zoom : %f\n", affichage_info->zoom);
+
+
+
+    if (ville->coord_X != ville->prec_X || ville->coord_Y != ville->prec_Y)
+        ville->changement_case = 1;
+    else ville->changement_case = 0;
+
+    if (ville->coord_X != ville->prec_X)
+        ville->prec_X = ville->coord_X;
+
+    if (ville->coord_Y != ville->prec_Y)
+        ville->prec_Y = ville->coord_Y;
 }
 
 void verification_sortie(t_construction* construction)
@@ -74,6 +85,10 @@ int main()
         temps(t1);
         affichage (ville, affichage_info, construction, info_algo);
         verification_sortie(construction);
+        if (key_press[KEY_S])
+            sauver_partie(ville);
+        if (key_press[KEY_Q])
+            charger_partie(ville);
         rest (20);
     }
     return 0;
