@@ -12,12 +12,6 @@ typedef struct route
     int rotation;
 }t_route;
 
-typedef struct point    ///Un point sur un plan est définit par 2 coordonnées
-{
-    int x;
-    int y;
-}t_point;
-
 extern BITMAP* im_route_1;
 extern BITMAP* im_route_2;
 extern BITMAP* im_route_3;

@@ -1,7 +1,7 @@
 #ifndef AFFICHAGE_H_INCLUDED
 #define AFFICHAGE_H_INCLUDED
-#define SCREEN_LARGEUR 800
-#define SCREEN_HAUTEUR 600
+#define SCREEN_LARGEUR 1024
+#define SCREEN_HAUTEUR 768
 #define TAILLE_CASE 20
 #define HAUTEUR_PLATEAU_BO_BAT 138
 #define HAUTEUR_PLATEAU_BO 70
@@ -9,6 +9,9 @@
 #define TAILLE_PLT_IMG_H 1008
 #define COORD_ORG_PLT_X 120
 #define COORD_ORG_PLT_Y 120
+
+#define LARGEUR_MAX_CASE 4
+#define HAUTEUR_MAX_CASE 6
 
 extern BITMAP* buffer;                  /// Déclaration en globale de toutes les BITMA¨P utilisées
 extern BITMAP* buffer_image;            ///
@@ -19,9 +22,11 @@ extern BITMAP* boconst;
 extern BITMAP* im_commerce_lv1;
 extern BITMAP* im_maison_lv1;
 extern BITMAP* im_industrie_lv1;
-extern BITMAP* centrale_lv1;
+extern BITMAP* im_centrale_lv1;
+extern BITMAP* im_chateau_lv1;
 extern BITMAP* bo_couleur;
 extern BITMAP* bo;
+
 
 
 

@@ -49,6 +49,11 @@ void traitement_clique (t_ville* ville, t_construction* construction, t_info_BFS
         construction->construction=1;
         construction->case_a_construire= creer_centrale();
         break;
+    case 0xc800c8:
+        printf("chateau d'eau\n");
+        construction->construction=1;
+        construction->case_a_construire= creer_chateau();
+        break;
     case 0x00ffff:
         printf("0,255,255\n");
         break;

@@ -4,14 +4,14 @@
 void sauver_partie(t_ville* ville)
 {
     FILE* fp=NULL;
-    /*BITMAP *buffer_sauv=NULL;
+    BITMAP *buffer_sauv=NULL;
     int i;
 
-    char nom[56];   //les 5 lettres de .carl et le \0
+    char nom[56];   //les 5 lettres de .ece et le \0
 
     buffer_sauv=create_bitmap(SCREEN_LARGEUR,SCREEN_HAUTEUR);
 
-    for (i=0; i<57; i++)
+    for (i=0; i<56; i++)
     {
         nom[i]= '\0';
     }
@@ -39,15 +39,15 @@ void sauver_partie(t_ville* ville)
 
         ///actualisation de l'affichage
         clear_bitmap(buffer_sauv);
-        textprintf_centre_ex(buffer_sauv, font, SCREEN_W / 2, 120,makecol(0, 100, 243), -1,"ENTRER LE NOM DE LA SAUVEGARDE : %s.carl\n50lettres maxi\n",nom);
+        textprintf_centre_ex(buffer_sauv, font, SCREEN_W / 2, 120,makecol(0, 100, 243), -1,"ENTRER LE NOM DE LA SAUVEGARDE : %s.ece   50lettres maxi   ",nom);
         blit(buffer_sauv,screen, 0, 0, 0, 0,SCREEN_LARGEUR, SCREEN_HAUTEUR);
     }
     while (!key[KEY_ENTER] && strlen(nom)<50);
 
-    ///ajout du .carl
-    strcat(nom,".carl");*/
+    ///ajout du .ece
+    strcat(nom,".ece");
 
-    fp=fopen("test.txt","w");
+    fp=fopen(nom,"w");
     if (fp != NULL)// On peut lire et écrire dans le fichier
     {
         fprintf(fp,"Partie sauvegardee le ...\n");

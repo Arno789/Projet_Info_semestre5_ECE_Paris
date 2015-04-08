@@ -14,11 +14,13 @@ t_case* creer_maison ()
     case_cree->bat = malloc(sizeof (t_bat));
     case_cree->bat->consommation_eau = CSMA_EAU_MAISON_LV1;
     case_cree->bat->consommation_elec = CSMA_ELEC_MAISON_LV1;
-    case_cree->bat->taille =1;
+    case_cree->bat->taille_x = 3;
+    case_cree->bat->taille_y = 3;
     case_cree->bat->image_bat = im_maison_lv1;
     //case_cree->bat->image_bat = NULL;
     case_cree->bat->type = 'm';
     case_cree->bat->rotation=0;
+    case_cree->parent=malloc(sizeof(t_point*));
     return case_cree;
 }
 
@@ -32,11 +34,13 @@ t_case* creer_commerce ()
     case_cree->bat = malloc(sizeof (t_bat));
     case_cree->bat->consommation_eau = CSMA_EAU_COMMERCE_LV1;
     case_cree->bat->consommation_elec = CSMA_ELEC_COMMERCE_LV1;
-    case_cree->bat->taille =1;
+    case_cree->bat->taille_x = 3;
+    case_cree->bat->taille_y = 3;
     case_cree->bat->image_bat = im_commerce_lv1;
     //case_cree->bat->image_bat = NULL;
     case_cree->bat->type = 'c';
     case_cree->bat->rotation=0;
+    case_cree->parent=malloc(sizeof(t_point*));
     return case_cree;
 }
 
@@ -51,11 +55,13 @@ t_case* creer_industrie ()
     case_cree->bat = malloc(sizeof (t_bat));
     case_cree->bat->consommation_eau = CSMA_EAU_INDUSTRIE_LV1;
     case_cree->bat->consommation_elec = CSMA_ELEC_INDUSTRIE_LV1;
-    case_cree->bat->taille =1;
+    case_cree->bat->taille_x = 3;
+    case_cree->bat->taille_y = 3;
     case_cree->bat->image_bat = im_industrie_lv1;
     //case_cree->bat->image_bat = NULL;
     case_cree->bat->type = 'i';
     case_cree->bat->rotation=0;
+    case_cree->parent=malloc(sizeof(t_point*));
     return case_cree;
 }
 
@@ -70,11 +76,34 @@ t_case* creer_centrale ()
     case_cree->bat = malloc(sizeof (t_bat));
     case_cree->bat->consommation_eau = CSMA_EAU_CENTRALE_LV1;
     case_cree->bat->consommation_elec = PRODU_ELEC_CENTRALE_LV1;
-    case_cree->bat->taille =3;
-    case_cree->bat->image_bat = centrale_lv1;
+    case_cree->bat->taille_x = 4;
+    case_cree->bat->taille_y = 6;
+    case_cree->bat->image_bat = im_centrale_lv1;
     //case_cree->bat->image_bat = NULL;
     case_cree->bat->type = 'e';
     case_cree->bat->rotation=0;
+    case_cree->parent=malloc(sizeof(t_point*));
+    return case_cree;
+}
+
+
+t_case* creer_chateau ()
+{
+    t_case* case_cree;
+    case_cree = malloc (sizeof (t_case));
+    case_cree->construction=1;
+    case_cree->densite=0;
+    case_cree->hapiness=0;
+    case_cree->bat = malloc(sizeof (t_bat));
+    case_cree->bat->consommation_eau = PRODU_EAU_CHATEAU_LV1;
+    case_cree->bat->consommation_elec = CSMA_ELEC_CHATEAU_LV1;
+    case_cree->bat->taille_x = 4;
+    case_cree->bat->taille_y = 6;
+    case_cree->bat->image_bat = im_chateau_lv1;
+    //case_cree->bat->image_bat = NULL;
+    case_cree->bat->type = 'o';
+    case_cree->bat->rotation=0;
+    case_cree->parent=malloc(sizeof(t_point*));
     return case_cree;
 }
 
@@ -92,13 +121,18 @@ int condition_placement (t_ville* ville, t_construction* construction)
     int espace = 1;
     int route = 0;
     int x,y;
-    for (x=ville->coord_X ; x< ville->coord_X+construction->case_a_construire->bat->taille; x++)
-        for (y=ville->coord_Y ; y< ville->coord_Y+construction->case_a_construire->bat->taille; y++)
+    for (x=ville->coord_X ; x< ville->coord_X+construction->case_a_construire->bat->taille_x; x++)
+        for (y=ville->coord_Y ; y< ville->coord_Y+construction->case_a_construire->bat->taille_y; y++)
         {
-            if (!ville->plan_construction[x][y])
+            if (ville->coord_X+construction->case_a_construire->bat->taille_x>LARGEUR_PLATEAU || ville->coord_Y+construction->case_a_construire->bat->taille_y > HAUTEUR_PLATEAU)
                 espace = 0;
-            if (ville->plan_construction[x][y] == 2)
-                route = 1;
+            else
+            {
+                if (!ville->plan_construction[x][y])
+                    espace = 0;
+                if (ville->plan_construction[x][y] == 2)
+                    route = 1;
+            }
         }
     if (construction->case_a_construire->bat->type=='r' && ville->plan_construction[ville->coord_X][ville->coord_Y])
     {
@@ -120,9 +154,15 @@ void placement (t_ville* ville, t_construction* construction)
         ville->plateau [ville->coord_X][ville->coord_Y]=construction->case_a_construire;
         ville->gestion_eau [ville->coord_X][ville->coord_Y] = construction->case_a_construire->bat->consommation_eau;
         ville->gestion_elec [ville->coord_X][ville->coord_Y] = construction->case_a_construire->bat->consommation_elec;
-        for (x=ville->coord_X ; x<ville->coord_X+construction->case_a_construire->bat->taille ; x++)
-            for (y=ville->coord_Y ; y<ville->coord_Y+construction->case_a_construire->bat->taille ; y++)
+        for (x=ville->coord_X ; x<ville->coord_X+construction->case_a_construire->bat->taille_x ; x++)
+            for (y=ville->coord_Y ; y<ville->coord_Y+construction->case_a_construire->bat->taille_y ; y++)
+            {
+                if (!ville->plateau[x][y]->parent)
+                    ville->plateau[x][y]->parent = malloc(sizeof(t_point*));
+                ville->plateau[x][y]->parent->x = ville->coord_X;
+                ville->plateau[x][y]->parent->y = ville->coord_Y;
                 ville->plan_construction [x][y]=0;
+            }
 
 
         construction->construction=0;
@@ -142,7 +182,7 @@ void afficher_construction_en_cours (t_ville* ville, t_affichage* affichage_info
                 affichage_construction_route (ville, construction, affichage_info, info);
 
             else if (construction->case_a_construire->bat->image_bat!=NULL)
-                stretch_sprite(buffer, construction->case_a_construire->bat->image_bat, (TAILLE_CASE*ville->coord_X-affichage_info->depX)*affichage_info->zoom, (TAILLE_CASE*ville->coord_Y-affichage_info->depY)*affichage_info->zoom, construction->case_a_construire->bat->taille*TAILLE_CASE*affichage_info->zoom, construction->case_a_construire->bat->taille*TAILLE_CASE*affichage_info->zoom);
+                stretch_sprite(buffer, construction->case_a_construire->bat->image_bat, (TAILLE_CASE*ville->coord_X-affichage_info->depX)*affichage_info->zoom, (TAILLE_CASE*ville->coord_Y-affichage_info->depY)*affichage_info->zoom, construction->case_a_construire->bat->taille_x*TAILLE_CASE*affichage_info->zoom, construction->case_a_construire->bat->taille_y*TAILLE_CASE*affichage_info->zoom);
         }
     }
 }
@@ -269,7 +309,7 @@ void placement_route (t_ville* ville, t_info_BFS* info, t_construction* construc
         info->clique=0;
         construction->creation_route=0;
         construction->construction=0;
-            }
+    }
 }
 
 int detection_route (t_ville* ville, int x, int y)

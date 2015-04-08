@@ -9,14 +9,26 @@
  t_construction contient leurs APPROVISIONNEMENT, leur TYPE (terrain vague, caserne, chateau, route...)
  et leur STADE de construction (Terrain vague (0 habitant) ou Ruine en cas de régression (0 habitant)- Cabane (10 habitants)- Maison (50 habitants)- Immeuble (100 habitants)- Gratte-ciel (1000 habitants)
 */
+
+
+typedef struct point    ///Un point sur un plan est définit par 2 coordonnées
+{
+    int x;
+    int y;
+}t_point;
+
+
 typedef struct bat
 {
+    char type;
+    int niveau;
+
     BITMAP* image_bat;
     int rotation;
     int consommation_eau;
     int consommation_elec;
-    char type;
-    int taille;
+    int taille_x;
+    int taille_y;
 } t_bat;
 
 
@@ -27,6 +39,8 @@ typedef struct tcase
     t_bat* bat;     /// On link la structure bat, contenant les infos propre au bat
     short int construction ; ///Booléen : Est ce qu'il y a un batiment / construction sur cette case ?
     int marqueur;
+
+    t_point* parent;
 } t_case;
 ///struct CASE
 /*

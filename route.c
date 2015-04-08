@@ -12,7 +12,9 @@ t_case* creer_route ()
     case_cree->bat->consommation_elec = 0;
     case_cree->bat->image_bat = im_route_n;
     case_cree->bat->type = 'r';
-    case_cree->bat->taille=1;
+    case_cree->bat->taille_x=1;
+    case_cree->bat->taille_y=1;
+    case_cree->parent=NULL;
     return case_cree;
 }
 
@@ -164,15 +166,15 @@ void algorithme (t_ville* ville, t_info_BFS* info) ///Attention ca pique les yeu
             tab[i]=NULL;
         }
         if (!tab2[0]) ///S'il n'y a plus de nouvelles données et qu'on est toujours dans la boucle ...
-            {
-                sortie=sortie + 666; ///SATAN
-                printf ("Erreur aucune route possible\n");
-            }
+        {
+            sortie=sortie + 666; ///SATAN
+            printf ("Erreur aucune route possible\n");
+        }
         init_tab(tab2);
     }
 
     if (sortie != 666) ///Si l'algorithme a reussi a trouver un chemin :
-        {
+    {
         printf("\nDistance minimum : %d\n", info->l[info->arrive->x][info->arrive->y]);
 
         x=info->arrive->x;
@@ -202,7 +204,7 @@ void algorithme (t_ville* ville, t_info_BFS* info) ///Attention ca pique les yeu
         printf ("\n");
     }
     update_route(ville);
-        ///FIN DE L' ALGO
+    ///FIN DE L' ALGO
 }
 
 void update_route (t_ville* ville)
@@ -217,8 +219,8 @@ void update_route (t_ville* ville)
             {
                 i = detection_route (ville, x, y);
                 attriubtion_image_route (ville->plateau[x][y], i);
-                ville->plateau[x][y]->bat->taille=1;
-
+                ville->plateau[x][y]->bat->taille_x=1;
+                ville->plateau[x][y]->bat->taille_y=1;
                 printf("%d  %p\n", ville->plateau[x][y]->bat->rotation, ville->plateau[x][y]->bat->image_bat);
 
                 if (x>0 && ville->plan_construction [x-1][y]!=0)

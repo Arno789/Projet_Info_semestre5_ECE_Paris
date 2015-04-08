@@ -9,9 +9,11 @@ t_case* init_case (t_case* tcase)
     tcase->hapiness=0;
     tcase->bat->consommation_eau=0;
     tcase->bat->consommation_elec=0;
-    tcase->bat->taille=0;
+    tcase->bat->taille_x=0;
+    tcase->bat->taille_y=0;
     tcase->bat->image_bat=NULL;
     tcase->bat->type='n';
+    tcase->parent = NULL;
     return tcase;
 }
 

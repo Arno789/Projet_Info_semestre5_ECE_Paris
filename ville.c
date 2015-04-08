@@ -43,8 +43,8 @@ void afficher_ville (t_ville* ville, t_affichage* affichage_info)
     origine_x=-affichage_info->depX%TAILLE_CASE + affichage_info->zoom*(affichage_info->depX/TAILLE_CASE)*TAILLE_CASE; ///On détermine les coordonées de l'origines de la case a afficher
     origine_y=-affichage_info->depY%TAILLE_CASE + affichage_info->zoom*(affichage_info->depY/TAILLE_CASE)*TAILLE_CASE;
 
-    x = ville->coord_X + SCREEN_W/(affichage_info->zoom*TAILLE_CASE);   ///On determine quelle sera la dernière case affichéé
-    y = ville->coord_Y + SCREEN_H/(affichage_info->zoom*TAILLE_CASE);
+    x = ville->coord_X + SCREEN_W/(affichage_info->zoom*TAILLE_CASE) + LARGEUR_MAX_CASE;   ///On determine quelle sera la dernière case affichéé
+    y = ville->coord_Y + SCREEN_H/(affichage_info->zoom*TAILLE_CASE) + HAUTEUR_MAX_CASE;
 
 
     if (ville->coord_X > ville->coord_X-ville->coord_X/affichage_info->zoom)
@@ -60,8 +60,8 @@ void afficher_ville (t_ville* ville, t_affichage* affichage_info)
         y=HAUTEUR_PLATEAU;
     //printf("x: %d - %d   y: %d - %d  zoom: %f  -  depX : %d  -  depY : %d\n", ville->coord_X, x,ville->coord_Y, y, affichage_info->zoom, affichage_info->depX, affichage_info->depY);
 
-    premiere_case_X = affichage_info->depX/TAILLE_CASE;
-    premiere_case_Y = affichage_info->depY/TAILLE_CASE;
+    premiere_case_X = affichage_info->depX/TAILLE_CASE - 4;
+    premiere_case_Y = affichage_info->depY/TAILLE_CASE - 6;
 
     if (premiere_case_X<0)
         premiere_case_X=0;
