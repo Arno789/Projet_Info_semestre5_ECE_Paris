@@ -12,8 +12,11 @@
 #include "construction.h"
 #include "editeur.h"
 #include "case.h"
+#include "eau.h"
+
 
 #include "affichage.h"
+#include "evenement.h"
 #include "sauvegarder.h"
 #include "charger.h"
 

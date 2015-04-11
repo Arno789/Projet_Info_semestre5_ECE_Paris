@@ -24,8 +24,8 @@ void affichage_construction_route (t_ville* ville, t_construction* construction,
     if (info->clique)
     {
 
-        x1 = info->depart->x*TAILLE_CASE*affichage_info->zoom-affichage_info->depX+5;
-        y1 = info->depart->y*TAILLE_CASE*affichage_info->zoom-affichage_info->depY+5;
+        x1 = info->depart[0]->x*TAILLE_CASE*affichage_info->zoom-affichage_info->depX+5;
+        y1 = info->depart[0]->y*TAILLE_CASE*affichage_info->zoom-affichage_info->depY+5;
         if (x1<0)
             x1=0;
         if (x1>SCREEN_W)
@@ -44,7 +44,7 @@ void affichage_construction_route (t_ville* ville, t_construction* construction,
 }
 
 
-void algorithme (t_ville* ville, t_info_BFS* info) ///Attention ca pique les yeux
+int algorithme (t_ville* ville, t_info_BFS* info) ///Attention ca pique les yeux
 {
     t_point* tab [100];
     t_point* tab2 [100];
@@ -54,20 +54,23 @@ void algorithme (t_ville* ville, t_info_BFS* info) ///Attention ca pique les yeu
     ///tab2 contient les réultat des points qui viennetn d'être analysé
 
     int sortie=0;
-    int i, j;
+    int i=0, j;
     int x, y;
 
     init_tab (tab);   ///On s'assure que tout est bien prèt avant de lancer l'algorithme
     init_tab (tab2);    ///
-    reset_info (info, ville);///
+
 
 ///On met à jour la matrice d'ajacence
     //update_adjacence (ville);
 
-
-    tab[0] = malloc(sizeof(t_point*));
-    tab[0]->x = info->depart->x; /// Le premier point qui vat être analysé est le point de départ
-    tab[0]->y = info->depart->y; ///
+    while (info->depart[i])
+    {
+        tab[i] = malloc(sizeof(t_point*));
+        tab[i]->x = info->depart[i]->x; /// Le premier point qui vat être analysé est le point de départ
+        tab[i]->y = info->depart[i]->y; ///
+        i++;
+    }
 
     while (!sortie)
     {
@@ -160,6 +163,7 @@ void algorithme (t_ville* ville, t_info_BFS* info) ///Attention ca pique les yeu
             tab [i]->x = x;
             tab [i]->y = y;
         }
+
         while (i<99)  ///On complete la fin du tableau par des pointeurs sur NULL
         {
             i++;
@@ -170,23 +174,29 @@ void algorithme (t_ville* ville, t_info_BFS* info) ///Attention ca pique les yeu
             sortie=sortie + 666; ///SATAN
             printf ("Erreur aucune route possible\n");
         }
-        init_tab(tab2);
+        reset_tab(tab2);
     }
+    return sortie;
+}
 
+void tracage_route (t_ville* ville, t_info_BFS* info, int sortie)
+{
+    ///Propre aux routes
+    int x, y, i, j;
     if (sortie != 666) ///Si l'algorithme a reussi a trouver un chemin :
     {
         printf("\nDistance minimum : %d\n", info->l[info->arrive->x][info->arrive->y]);
 
         x=info->arrive->x;
         y=info->arrive->y;
-        sortie =0;
+        sortie = 0;
         ville->plateau[x][y]->construction=2;
         ville->plateau[x][y]->bat->type = 'r';
         ville->plan_construction[x][y] = 0;
         while (!sortie)
         {
 ///On va refaire le chemin inverse en parcourant le tabelau 'perd' qui contient les coordonnées de la case mère de chaque case, jusqu'à ce qu'on revienne à la case de départ
-            if (x != info->depart->x || y!=info->depart->y)
+            if (x != info->depart[0]->x || y!=info->depart[0]->y)
             {
                 i = info->pred[x][y]->x;
                 j = info->pred[x][y]->y;
@@ -197,7 +207,7 @@ void algorithme (t_ville* ville, t_info_BFS* info) ///Attention ca pique les yeu
             ville->plateau[x][y]->bat->type = 'r';
             ville->plan_construction[x][y] = 0;
             printf("*"); ///Affichage d'une étoile pour chaque route créée (oui, ceci ne sert à rien , c'est juste joli)
-            if (x==info->depart->x && y==info->depart->y) ///Tant qu'on n'est pas revenu à notre point de départ, on reste dans la boucle
+            if (x==info->depart[0]->x && y==info->depart[0]->y) ///Tant qu'on n'est pas revenu à notre point de départ, on reste dans la boucle
                 sortie=1;
             else sortie=0;
         }
@@ -243,13 +253,15 @@ void update_route (t_ville* ville)
 void init_info (t_info_BFS* info)
 {
     int i, j;
-    info->depart=malloc(sizeof(t_point*));
-    info->depart->x=0;
-    info->depart->y=0;
+
+    for (i=0 ; i<30 ; i++)
+        info->depart[i]=NULL;
+
     info->arrive=malloc(sizeof(t_point*));
     info->arrive->x=0;
     info->arrive->y=0;
     info->clique = 0;
+
 
     info->l = malloc(LARGEUR_PLATEAU*sizeof(int*));
     info->pred= malloc(LARGEUR_PLATEAU*sizeof(t_point***));
@@ -273,15 +285,47 @@ void reset_info (t_info_BFS* info, t_ville* ville)
     {
         for (j=0 ; j<HAUTEUR_PLATEAU ; j++)
         {
-            info->pred [i][j]->x = 0;
-            info->pred [i][j]->y = 0;
-            info->l[i][j]=0;
+            if (info->pred [i][j])
+            {
+                info->pred [i][j]->x = 0;
+                info->pred [i][j]->y = 0;
+            }
+                info->l[i][j]=0;
+        }
+    }
+    info->arrive->x=0;
+    info->arrive->y=0;
+    info->clique = 0;
+
+    for (i=0 ; i< 30 ; i++)
+    {
+        /*if (info->depart[i])
+            free (info->depart[i]);*/
+        info->depart[i] = NULL;
+    }
+}
+
+void reset_marqueur (t_ville* ville)
+{
+    int i,j;
+    for (i=0 ; i<LARGEUR_PLATEAU ; i++)
+    {
+        for (j=0 ; j<HAUTEUR_PLATEAU ; j++)
+        {
             ville->plateau[i][j]->marqueur=0;
         }
     }
 }
 
 void init_tab (t_point* tab [100])
+{
+    int i;
+    for (i=0 ; i<100 ; i++)
+
+        tab[i]=NULL;
+}
+
+void reset_tab (t_point* tab [100])
 {
     int i;
     for (i=0 ; i<100 ; i++)

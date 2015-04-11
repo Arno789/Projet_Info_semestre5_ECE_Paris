@@ -1,0 +1,420 @@
+Partie sauvegardee le ...
+population : 0
+flouz : 200000
+ ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! *
+    CASE [10][14]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! *
+    CASE [11][14]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! *
+    CASE [12][14]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! *
+    CASE [13][14]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! *
+    CASE [14][14]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! *
+    CASE [15][14]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! *
+    CASE [16][14]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! *
+    CASE [17][14]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! *
+    CASE [18][14]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ ! ! ! ! *
+    CASE [18][19]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! *
+    CASE [19][14]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ ! ! ! ! *
+    CASE [19][19]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ *
+    CASE [19][20]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ *
+    CASE [19][21]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ *
+    CASE [19][22]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ *
+    CASE [19][23]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! *
+    CASE [20][14]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ ! ! *
+    CASE [20][17]        hapiness : 0
+        densite : 0
+        construction : 1
+        consommation_eau : 400
+        consommation_elec : 50
+
+        type : o
+ ! ! ! ! ! *
+    CASE [20][23]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! *
+    CASE [21][14]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ ! ! ! ! ! ! ! ! *
+    CASE [21][23]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! *
+    CASE [22][14]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ ! ! ! ! ! ! ! ! *
+    CASE [22][23]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! *
+    CASE [23][14]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ ! ! ! ! ! ! ! ! *
+    CASE [23][23]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! *
+    CASE [24][14]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ *
+    CASE [24][15]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ *
+    CASE [24][16]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ *
+    CASE [24][17]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ *
+    CASE [24][18]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ *
+    CASE [24][19]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ *
+    CASE [24][20]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ *
+    CASE [24][21]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ *
+    CASE [24][22]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ *
+    CASE [24][23]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ *
+    CASE [24][24]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ *
+    CASE [24][25]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ *
+    CASE [24][26]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ *
+    CASE [24][27]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! *
+    CASE [25][21]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ *
+    CASE [25][22]        hapiness : 0
+        densite : 0
+        construction : 1
+        consommation_eau : 200
+        consommation_elec : 400
+
+        type : e
+ ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! *
+    CASE [26][21]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! *
+    CASE [27][21]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! *
+    CASE [28][21]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! *
+    CASE [29][21]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! *
+    CASE [30][21]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! *
+    CASE [31][21]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! *
+    CASE [32][21]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ *
+    CASE [32][22]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ *
+    CASE [32][23]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ *
+    CASE [32][24]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ *
+    CASE [32][25]        hapiness : 0
+        densite : 0
+        construction : 2
+        consommation_eau : 0
+        consommation_elec : 0
+
+        type : r
+ ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! !

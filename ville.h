@@ -39,6 +39,8 @@ typedef struct tcase
     t_bat* bat;     /// On link la structure bat, contenant les infos propre au bat
     short int construction ; ///Booléen : Est ce qu'il y a un batiment / construction sur cette case ?
     int marqueur;
+    int appro_eau; /// Quantité d'eau que la case recoit des chateaux d'eau, est géré la l'algo des chateau d'eau normalement appro_eau == csmation_eau
+    int appro_elec;
 
     t_point* parent;
 } t_case;

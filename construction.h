@@ -22,6 +22,7 @@ t_case* creer_maison ();
 t_case* creer_commerce ();
 t_case* creer_industrie ();
 t_case* creer_centrale ();
+t_case* creer_chateau ();
 
 
 #endif // CONSTRUCTION_H_INCLUDED

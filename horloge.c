@@ -17,18 +17,34 @@ void init_temps ()
 void temps (clock_t t1)
 {
     clock_t t2;
-    long clk_tck = CLOCKS_PER_SEC;
-    t2 = clock();
-    if (horloge.clock1 != (t2-t1)/clk_tck %60)
-        horloge.tic=1;
-    else horloge.tic=0;
-    if (key[KEY_PLUS_PAD])
+    long clk_tck;
+
+    if (acceleration)
+        clk_tck = CLOCKS_PER_SEC/acceleration;
+
+    if (key_press[KEY_PLUS_PAD] && acceleration<4)
+    {
         acceleration++;
-    else if (key[KEY_MINUS_PAD])
+        printf ("acceleration : %d\n", acceleration);
+    }
+    else if (key_press[KEY_MINUS_PAD] && acceleration>0)
+    {
         acceleration--;
-    horloge.clock1 = (t2-t1)/clk_tck%60;
-    if (horloge.tic)
-        horloge.seconde=horloge.seconde+acceleration;
+        printf ("acceleration : %d\n", acceleration);
+    }
+
+    t2 = clock();
+
+    if (acceleration && horloge.clock1 != (t2-t1)/clk_tck %60)
+    {
+        horloge.tic=1;
+        horloge.seconde++;
+    }
+    else horloge.tic=0;
+
+    if (acceleration)
+        horloge.clock1 = (t2-t1)/clk_tck%60;
+
     if (horloge.seconde>=60)
     {
         horloge.minute++;
@@ -44,8 +60,8 @@ void temps (clock_t t1)
         horloge.heure = 0;
         horloge.jour++;
     }
-    if (horloge.tic)
-        afficher_temps_console ();
+    /*if (horloge.tic)
+        afficher_temps_console ();*/
 }
 
 

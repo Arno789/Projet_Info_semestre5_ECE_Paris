@@ -83,6 +83,8 @@ int main()
         actualiser_coord (ville, affichage_info);
         traitement_clique(ville, construction, info_algo);
         temps(t1);
+        if (!construction->construction)
+            evenement (ville, info_algo);
         affichage (ville, affichage_info, construction, info_algo);
         verification_sortie(construction);
         if (key_press[KEY_S])

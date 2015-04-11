@@ -66,7 +66,7 @@ void charger_case(FILE*fp, t_ville* ville)
         fscanf(fp,"\n    CASE [%d][%d]",&i,&j);
         fscanf(fp,"        hapiness : %d\n",&(ville->plateau[i][j]->hapiness));
         fscanf(fp,"        densite : %d\n",&(ville->plateau[i][j]->densite));
-        fscanf(fp,"        construction : %d\n",&(ville->plateau[i][j]->construction));
+        fscanf(fp,"        construction : %hd\n",&(ville->plateau[i][j]->construction));
         if (ville->plateau[i][j]->bat != NULL) charger_bat(fp,i,j, ville);
     }
 }
@@ -137,7 +137,7 @@ void charger_partie(t_ville* ville)
 
     ///ajout du .ece
     strcat(nom,".ece");
-    fp=fopen("test.txt","r");
+    fp=fopen(nom,"r");
     if (fp != NULL)// On peut lire et écrire dans le fichier
     {
         init_ville(ville);

@@ -13,6 +13,8 @@ t_case* init_case (t_case* tcase)
     tcase->bat->taille_y=0;
     tcase->bat->image_bat=NULL;
     tcase->bat->type='n';
+    tcase->appro_eau = 0;
+    tcase->appro_elec = 0;
     tcase->parent = NULL;
     return tcase;
 }

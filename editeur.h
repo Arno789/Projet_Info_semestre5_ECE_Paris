@@ -4,7 +4,7 @@
 #define HAUTEUR_PLATEAU 35
 
 #define DENS_MAISON_CTR 10
-#define CSMA_EAU_MAISON_LV1 10
+#define CSMA_EAU_MAISON_LV1 20
 #define CSMA_ELEC_MAISON_LV1 10
 
 #define DENS_COMMERCE_CTR 10
@@ -15,11 +15,11 @@
 #define CSMA_EAU_INDUSTRIE_LV1 30
 #define CSMA_ELEC_INDUSTRIE_LV1 30
 
-#define CSMA_EAU_CENTRALE_LV1 200
+#define CSMA_EAU_CENTRALE_LV1 0
 #define PRODU_ELEC_CENTRALE_LV1 400
 
-#define PRODU_EAU_CHATEAU_LV1 400
-#define CSMA_ELEC_CHATEAU_LV1 50
+#define PRODU_EAU_CHATEAU_LV1 50
+#define CSMA_ELEC_CHATEAU_LV1 0
 
 extern char touche;  ///Déclaration type compalleg *///
                                                     ///
