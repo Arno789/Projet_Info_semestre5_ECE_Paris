@@ -13,6 +13,7 @@
 #include "editeur.h"
 #include "case.h"
 #include "eau.h"
+#include "elec.h"
 
 
 #include "affichage.h"

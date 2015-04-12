@@ -41,7 +41,7 @@ typedef struct tcase
     int marqueur;
     int appro_eau; /// Quantité d'eau que la case recoit des chateaux d'eau, est géré la l'algo des chateau d'eau normalement appro_eau == csmation_eau
     int appro_elec;
-
+    int age;
     t_point* parent;
 } t_case;
 ///struct CASE
@@ -69,6 +69,7 @@ typedef struct ville
     int prec_X;
     int prec_Y;
     int changement_case;
+    int mode_de_jeu;
 } t_ville;
 
 

@@ -21,6 +21,7 @@ t_case* creer_maison ()
     case_cree->bat->type = 'm';
     case_cree->bat->rotation=0;
     case_cree->parent=malloc(sizeof(t_point*));
+    case_cree->age=0;
     return case_cree;
 }
 
@@ -41,6 +42,7 @@ t_case* creer_commerce ()
     case_cree->bat->type = 'c';
     case_cree->bat->rotation=0;
     case_cree->parent=malloc(sizeof(t_point*));
+    case_cree->age=0;
     return case_cree;
 }
 
@@ -62,6 +64,7 @@ t_case* creer_industrie ()
     case_cree->bat->type = 'i';
     case_cree->bat->rotation=0;
     case_cree->parent=malloc(sizeof(t_point*));
+    case_cree->age=0;
     return case_cree;
 }
 
@@ -83,6 +86,8 @@ t_case* creer_centrale ()
     case_cree->bat->type = 'e';
     case_cree->bat->rotation=0;
     case_cree->parent=malloc(sizeof(t_point*));
+    case_cree->appro_elec = PRODU_ELEC_CENTRALE_LV1;
+    case_cree->age=0;
     return case_cree;
 }
 
@@ -105,6 +110,7 @@ t_case* creer_chateau ()
     case_cree->bat->rotation=0;
     case_cree->appro_eau = PRODU_EAU_CHATEAU_LV1;
     case_cree->parent=malloc(sizeof(t_point*));
+    case_cree->age=0;
     return case_cree;
 }
 

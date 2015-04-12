@@ -1,27 +1,26 @@
 #include "projet.h"
 
-///La capacité totale d’un château d’eau permet d’alimenter en permanence 5000 habitants.
 
 
-void update_eau (t_ville* ville, t_info_BFS* info)
+void update_elec (t_ville* ville, t_info_BFS* info)
 {
     int x,y,i,j,k, parent_x, parent_y;
     i=0;
     j=0;
-    reset_info_eau(info, ville);
+    reset_info_elec(info, ville);
     reset_marqueur (ville);
 
 /// On reinitialise toutes les valeur d'approvisionnement a 0
-/// Sauf pour les chateaux d'eau qui bénéficient d'untraitement spécial
+/// Sauf pour les centrales qui bénéficient d'untraitement spécial
 
     for (i=0 ; i<LARGEUR_PLATEAU ; i++)
         for (j=0 ; j<HAUTEUR_PLATEAU ; j++)
             if ((ville->plateau[i][j]->bat->type=='m' || ville->plateau[i][j]->bat->type=='c' || ville->plateau[i][j]->bat->type=='i'))
-                ville->plateau[i][j]->appro_eau=0;
-            else if (ville->plateau[i][j]->bat->type=='o')
-                ville->plateau[i][j]->appro_eau = ville->plateau[i][j]->bat->consommation_eau;
+                ville->plateau[i][j]->appro_elec=0;
+            else if (ville->plateau[i][j]->bat->type=='e')
+                ville->plateau[i][j]->appro_elec = ville->plateau[i][j]->bat->consommation_elec;
 
-///On va scanner tout le plateau a la recherche de chateaux d'eau
+///On va scanner tout le plateau a la recherche de centrale
     for (x=0 ; x<LARGEUR_PLATEAU ; x++)
     {
         for (y=0 ; y<HAUTEUR_PLATEAU ; y++)
@@ -34,8 +33,8 @@ void update_eau (t_ville* ville, t_info_BFS* info)
                 parent_y = ville->plateau[x][y]->parent->y;
 
                 if (ville->plateau[parent_x][parent_y]->bat) ///Simple if de sécurité, normalement toujours vérifié
-                    if (ville->plateau[parent_x][parent_y]->bat->type == 'o' && !ville->plateau[parent_x][parent_y]->marqueur)
-                        ///Si la case scannée est un chateau d'eau et qu'il n'a pas déjà été scanné avant
+                    if (ville->plateau[parent_x][parent_y]->bat->type == 'e' && !ville->plateau[parent_x][parent_y]->marqueur)
+                        ///Si la case scannée est une centrale et qu'il n'a pas déjà été scanné avant
                     {
                         k=0; ///initialisation des points de départ de l'algo
                         for (i=0 ; i<ville->plateau[parent_x][parent_y]->bat->taille_x ; i++)
@@ -43,7 +42,7 @@ void update_eau (t_ville* ville, t_info_BFS* info)
                             for (j=0 ; j<ville->plateau[parent_x][parent_y]->bat->taille_y ; j++)
                             {
                                 if (!i || !j || i==ville->plateau[parent_x][parent_y]->bat->taille_x-1 || j==ville->plateau[parent_x][parent_y]->bat->taille_y-1)
-                                ///on ne récupère toutes les cases en périférie du chateau d'eau (donc 5+3+5+3)
+                                ///on ne récupère toutes les cases en périférie de la centrale (donc 5+3+5+3)
                                 {
                                     ///On alloue, pour un plus grande optimisation mémoire , on free tout ce que n'est pas utile
                                     if (!info->depart[k])
@@ -59,25 +58,25 @@ void update_eau (t_ville* ville, t_info_BFS* info)
                         }
                         /// Apres qu'on est trouvé un chateau et effectué tous les traitement pour le préparer,
                         /// On lance l'algorithme
-                        algorithme_eau(ville, info, ville->plateau[parent_x][parent_y]->bat->consommation_eau);
+                        algorithme_elec(ville, info, ville->plateau[parent_x][parent_y]->bat->consommation_elec);
 
-                        reset_info_eau(info, ville);
+                        reset_info_elec(info, ville);
                         ///On ne reset que les marqueurs sur les routes, pas sur les batiments
                         reset_marqueur_route (ville);
-                        //printf("algo eau\n");
+                        //printf("algo elec\n");
                     }
 
             }
         }
     }
     /// va checker toutes les cases du terrain pour vérifier si elles sont approvisionnées
-    verification_distrib_eau (ville);
+    verification_distrib_elec (ville);
 }
 
 
-void algorithme_eau (t_ville* ville, t_info_BFS* info, int capa_totale)
+void algorithme_elec(t_ville* ville, t_info_BFS* info, int capa_totale)
 {
-    ///Capa_totale est le nombre d'habitant max que la somme des chateaux d'eau peut fournir
+    ///Capa_totale est le nombre d'habitant max que la somme des centrales d'elec peuvent fournir
     t_point* tab [100];
     t_point* tab2 [100];
 
@@ -189,31 +188,26 @@ void algorithme_eau (t_ville* ville, t_info_BFS* info, int capa_totale)
                     {
                         parent_x = ville->plateau[tab[i]->x+a][tab[i]->y+b]->parent->x;  /// On se réfère a son parent,
                         parent_y = ville->plateau[tab[i]->x+a][tab[i]->y+b]->parent->y;
-                        if ((ville->plateau[parent_x][parent_y]->bat->type == 'm' || ville->plateau[parent_x][parent_y]->bat->type == 'c' || ville->plateau[parent_x][parent_y]->bat->type == 'i') && ville->plateau[parent_x][parent_y]->bat->consommation_eau != ville->plateau[parent_x][parent_y]->appro_eau)
+                        if ((ville->plateau[parent_x][parent_y]->bat->type == 'm' || ville->plateau[parent_x][parent_y]->bat->type == 'c' || ville->plateau[parent_x][parent_y]->bat->type == 'i') && ville->plateau[parent_x][parent_y]->bat->consommation_elec != ville->plateau[parent_x][parent_y]->appro_elec)
                         /// Si cette case n'a pas étée completement apprivisionnée et si elle est approvisionnable
 
                         {
-                            if (capa_totale >=  ville->plateau[parent_x][parent_y]->bat->consommation_eau)  ///S'il reste suffisamment d'eau pour allimenter tout le bat
+                            if (capa_totale >=  ville->plateau[parent_x][parent_y]->bat->consommation_elec)  ///S'il reste suffisamment de courant pour allimenter tout le bat
                             {
-                                /// Mise à jour de la capacité restante du chateau d'eau
-                                capa_totale = capa_totale - ville->plateau[parent_x][parent_y]->bat->consommation_eau;
-                                ville->plateau[parent_x][parent_y]->appro_eau =  ville->plateau[parent_x][parent_y]->bat->consommation_eau;
+                                /// Mise à jour de la capacité restante de la centrale électrique
+                                capa_totale = capa_totale - ville->plateau[parent_x][parent_y]->bat->consommation_elec;
+                                ville->plateau[parent_x][parent_y]->appro_elec =  ville->plateau[parent_x][parent_y]->bat->consommation_elec;
                             }
-                            else    ///Sinon
-                            {
-                                ville->plateau[parent_x][parent_y]->appro_eau = capa_totale;
-                                capa_totale = 0;
-                            }
-
+                            ///Sinon, contrairement à l'eau on ne fourni aucun courant à ce batiment
                         }
                     }
                 }
             }
-            /// S'il n'y a plus d'eau das le chateau
+            /// S'il n'y a plus de courant a distribuer
             if (!capa_totale)
             {
                 sortie = 1;
-                //printf ("Il n'y a pas assez de chateau d'eau !\n");
+                //printf ("Il n'y a pas assez de centrale !\n");
             }
 
             i++; ///On passe a la case suivante de 'tab'
@@ -249,7 +243,7 @@ void algorithme_eau (t_ville* ville, t_info_BFS* info, int capa_totale)
 }
 
 
-void reset_info_eau (t_info_BFS* info, t_ville* ville)
+void reset_info_elec (t_info_BFS* info, t_ville* ville)
 {
     int i;
     info->arrive->x=0;
@@ -264,20 +258,7 @@ void reset_info_eau (t_info_BFS* info, t_ville* ville)
     }
 }
 
-void reset_marqueur_route (t_ville* ville)
-{
-    int i,j;
-    for (i=0 ; i<LARGEUR_PLATEAU ; i++)
-    {
-        for (j=0 ; j<HAUTEUR_PLATEAU ; j++)
-        {
-            if (ville->plateau[i][j]->bat && ville->plateau[i][j]->bat->type == 'r')
-                ville->plateau[i][j]->marqueur=0;
-        }
-    }
-}
-
-void verification_distrib_eau (t_ville* ville)
+void verification_distrib_elec (t_ville* ville)
 {
     int i,j, cool;
     cool = 1; ///Faut toujours être positif
@@ -285,11 +266,11 @@ void verification_distrib_eau (t_ville* ville)
     {
         for (j=0 ; j<HAUTEUR_PLATEAU ; j++)
         {
-            if (ville->plateau[i][j]->bat && ville->plateau[i][j]->bat->consommation_eau != ville->plateau[i][j]->appro_eau && (ville->plateau[i][j]->bat->type=='m' || ville->plateau[i][j]->bat->type=='c' || ville->plateau[i][j]->bat->type=='i'))
+            if (ville->plateau[i][j]->bat && ville->plateau[i][j]->bat->consommation_elec != ville->plateau[i][j]->appro_elec && (ville->plateau[i][j]->bat->type=='m' || ville->plateau[i][j]->bat->type=='c' || ville->plateau[i][j]->bat->type=='i'))
                 cool =0;
         }
     }
     if (cool)
-        printf ("Tout le monde a de l'eau !\n");
-    else printf ("Leger soucis d'eau\n");
+        printf ("Tout le monde a de l'elec !\n");
+    else printf ("Leger soucis de jus\n");
 }
